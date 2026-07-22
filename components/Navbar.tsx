@@ -85,7 +85,7 @@ export default function Navbar() {
                 className="flex items-center justify-center gap-2 w-full py-2.5 text-sm border border-[#D4AF37] text-[#D4AF37] rounded hover:bg-[#D4AF37] hover:text-black transition-all"
               >
                 <PhoneCall className="w-4 h-4" />
-                +123 456 789
+                +237 456 789
               </a>
             </div>
           </div>

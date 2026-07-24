@@ -3,8 +3,8 @@
 import { useEffect, useRef, useState } from 'react';
 import { Phone, Mail, MapPin, MessageCircle, Clock } from 'lucide-react';
 
-// lucide-react a retiré les icônes de marques (Facebook, Instagram...) des versions
-// récentes de la librairie, donc on utilise de simples SVG inline pour ces réseaux.
+
+// la librairie, donc on utilise de simples SVG inline pour ces réseaux.
 function FacebookIcon({ className }: { className?: string }) {
   return (
     <svg viewBox="0 0 24 24" fill="currentColor" className={className}>

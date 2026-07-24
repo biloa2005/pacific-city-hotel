@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { Phone, Mail, MapPin, MessageCircle, Clock } from 'lucide-react';
 
-
+//icone
 // la librairie, donc on utilise de simples SVG inline pour ces réseaux.
 function FacebookIcon({ className }: { className?: string }) {
   return (

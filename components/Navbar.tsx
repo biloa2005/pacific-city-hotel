@@ -7,7 +7,7 @@ import { Menu, X, Hotel, PhoneCall } from 'lucide-react';
 const NAV_LINKS = [
   { name: 'Accueil', href: '#' },
   { name: 'À propos', href: '#a-propos' },
-  { name: 'Services', href: '#services' },
+  // { name: 'Services', href: '#services' },
   { name: 'Chambres', href: '#chambres' },
   { name: 'Restaurant', href: '#restaurant' },
   { name: 'Divertissement', href: '#divertissement' },

@@ -104,7 +104,8 @@ Site conçu et développé par **Biloa Philemon Armand**, étudiant en Génie Lo
 
 - 📧 [biloaphilemon@gmail.com](mailto:biloaphilemon@gmail.com)
 - 💻 [github.com/biloa2005](https://github.com/biloa2005)
-
+## outil analise
+ Le site utilise **Vercel Web Analytics** pour mesurer l'audience de manière anonyme. 
 ## 📄 Licence
 
 Ce projet est développé à des fins de démonstration pour le Pacific Hotel. Tous droits réservés.

@@ -14,8 +14,38 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-   title: 'Pacific City Hotel | Hôtel de Luxe',
-  description: 'Réservez votre séjour inoubliable au Pacific City Hotel. Confort, vue imprenable et services exclusifs.',
+  metadataBase: new URL("https://www.pacifichotel.cm"),
+
+  title: {
+    default: "Pacific Hotel | Hôtel à Obala, Cameroun",
+    template: "%s | Pacific Hotel",
+  },
+
+  description:
+    "Découvrez Pacific Hotel à Obala, près de Yaoundé. Chambres confortables, restaurant et services adaptés à vos séjours au Cameroun.",
+
+  keywords: [
+    "Pacific Hotel",
+    "hôtel Obala",
+    "hôtel à Obala",
+    "hôtel Cameroun",
+    "hôtel près de Yaoundé",
+  ],
+
+  openGraph: {
+    title: "Pacific Hotel | Hôtel à Obala",
+    description:
+      "Découvrez Pacific Hotel à Obala, près de Yaoundé.",
+    url: "https://www.pacifichotel.cm",
+    siteName: "Pacific Hotel",
+    type: "website",
+    locale: "fr_CM",
+  },
+
+  robots: {
+    index: true,
+    follow: true,
+  },
 };
 
 export default function RootLayout({
@@ -25,7 +55,7 @@ export default function RootLayout({
 }>) {
   return (
     <html
-      lang="en"
+      lang="fr"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">{children}

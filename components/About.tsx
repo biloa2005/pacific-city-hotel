@@ -47,7 +47,7 @@ export default function About() {
         >
           <div className="relative aspect-[4/5] max-w-md mx-auto lg:mx-0">
             <img
-              src="https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?q=80&w=1200&auto=format&fit=crop"
+              src="/about.webp"
               alt="Hall d'accueil du Pacific Hotel"
               className="w-full h-full object-cover rounded-2xl shadow-xl"
             />

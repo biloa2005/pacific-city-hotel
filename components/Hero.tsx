@@ -18,8 +18,7 @@ export default function Hero() {
       <div
         className="absolute inset-0 bg-cover bg-center scale-105"
         style={{
-          backgroundImage:
-            "url('https://images.unsplash.com/photo-1566073771259-6a8506099945?q=80&w=2000&auto=format&fit=crop')",
+          backgroundImage: "url('/hero.webp')",
         }}
       />
       {/* Voile dégradé pour la lisibilité du texte */}

@@ -43,7 +43,7 @@ export default function Navbar() {
             <li key={link.name}>
               <Link 
                 href={link.href}
-                className="px-3 py-2 rounded hover:text-[#D4AF37] hover:bg-[#D4AF37]/10 transition-colors"
+                className="px-3 py-2 rounded text-gray-800 hover:text-[#D4AF37] hover:bg-[#D4AF37]/10 transition-colors"
               >
                 {link.name}
               </Link>
@@ -71,7 +71,7 @@ export default function Navbar() {
                   key={link.name}
                   href={link.href}
                   onClick={closeMenu}
-                  className="px-4 py-3 text-sm font-medium hover:bg-[#D4AF37]/10 hover:text-[#D4AF37] transition-colors"
+                  className="px-4 py-3 text-sm font-medium text-gray-800 hover:bg-[#D4AF37]/10 hover:text-[#D4AF37] transition-colors"
                 >
                   {link.name}
                 </Link>

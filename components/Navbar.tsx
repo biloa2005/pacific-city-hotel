@@ -1,8 +1,8 @@
 'use client';
-
 import { useState } from 'react';
 import Link from 'next/link';
-import { Menu, X, Hotel, PhoneCall } from 'lucide-react';
+import Image from 'next/image';
+import { Menu, X, PhoneCall } from 'lucide-react';
 
 const NAV_LINKS = [
   { name: 'Accueil', href: '#' },
@@ -17,7 +17,6 @@ const NAV_LINKS = [
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
-
   const toggleMenu = () => setIsOpen((prev) => !prev);
   const closeMenu = () => setIsOpen(false);
 
@@ -25,16 +24,20 @@ export default function Navbar() {
     <header className="sticky top-0 z-50 w-full bg-white/95 backdrop-blur-md border-b border-[#D4AF37]/20 shadow-sm">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-[65px] relative">
         
-        {/* LOGO & NOM DE L'HÔTEL */}
+        {/* LOGO */}
         <Link 
           href="#" 
-          className="flex items-center gap-2 text-xl font-serif font-bold tracking-wide hover:opacity-90 transition-opacity"
+          className="flex items-center shrink-0 hover:opacity-90 transition-opacity"
           onClick={closeMenu}
         >
-          <Hotel className="w-7 h-7 text-[#D4AF37]" />
-          <span className="bg-gradient-to-r from-[#D4AF37] via-[#F3E5AB] to-[#AA7C11] bg-clip-text text-transparent">
-            Pacific Hotel
-          </span>
+          <Image
+            src="/logo.png"
+            alt="Pacific City Hotel"
+            width={200}
+            height={200}
+            priority
+            className="h-[52px] sm:h-[58px] w-auto object-contain"
+          />
         </Link>
 
         {/* NAVIGATION DESKTOP */}
@@ -77,7 +80,6 @@ export default function Navbar() {
                 </Link>
               ))}
             </nav>
-
             {/* Contact rapide */}
             <div className="p-3 border-t border-[#D4AF37]/20 bg-[#D4AF37]/5">
               <a 

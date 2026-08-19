@@ -1,5 +1,6 @@
 import Link from 'next/link';
-import { Hotel, Phone, Mail, MapPin, ArrowUpRight } from 'lucide-react';
+import { Phone, Mail, MapPin, ArrowUpRight } from 'lucide-react';
+import Image from 'next/image';
 
 const NAV_LINKS = [
   { name: 'Accueil', href: '#' },
@@ -26,7 +27,14 @@ export default function Footer() {
           {/* BLOC IDENTITÉ */}
           <div className="lg:col-span-1">
             <Link href="#" className="flex items-center gap-2 text-xl font-serif font-bold tracking-wide w-fit">
-              <Hotel className="w-6 h-6 text-[#D4AF37]" />
+               <Image
+                          src="/logo.png"
+                          alt="Pacific City Hotel"
+                          width={200}
+                          height={200}
+                          priority
+                          className="h-[52px] sm:h-[58px] w-auto object-contain"
+                        />
               <span className="bg-gradient-to-r from-[#D4AF37] via-[#F3E5AB] to-[#AA7C11] bg-clip-text text-transparent">
                 Pacific Hotel
               </span>

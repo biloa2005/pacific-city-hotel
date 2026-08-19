@@ -7,11 +7,12 @@ import Entertainment from "@/components/Entertainment";
 import Gallery from "@/components/Gallery";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
-
+import ScrollToTop from "@/components/ScrollToTop";
 export default function Home() {
   return (
    <>
    <div className="">
+ <ScrollToTop/>
      <Navbar/>
      <Hero/>
      <About/>

@@ -19,13 +19,13 @@ const GALLERY: GalleryImage[] = [
   },
   {
     id: '2',
-    src: '/gallerie/directeur.jfif',
+    src: '/gallerie/accueil.webp',
     alt: 'Suite Présidentielle',
     category: 'Chambres',
   },
   {
     id: '3',
-    src: '/gallerie/parking.jpg',
+    src: '/gallerie/parking.webp',
     alt: 'Équipe du Pacific Hotel',
     category: 'Notre équipe',
   },

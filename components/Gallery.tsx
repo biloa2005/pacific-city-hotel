@@ -205,8 +205,11 @@ export default function Gallery() {
 
           <button
             type="button"
-            onClick={() => setSelectedImage(null)}
-            className="absolute top-5 right-5 sm:top-8 sm:right-8 w-10 h-10 flex items-center justify-center rounded-full bg-white/10 text-white hover:bg-[#D4AF37] hover:text-black transition-colors"
+            onClick={(e) => {
+              e.stopPropagation();
+              setSelectedImage(null);
+            }}
+            className="absolute top-5 right-5 z-10 sm:top-8 sm:right-8 w-10 h-10 flex items-center justify-center rounded-full bg-white/10 text-white hover:bg-[#D4AF37] hover:text-black transition-colors"
             aria-label="Fermer"
           >
             <X className="w-5 h-5" />

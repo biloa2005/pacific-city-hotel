@@ -22,7 +22,7 @@ export default function Navbar() {
 
   return (
     <header className="sticky top-0 z-50 w-full bg-white/95 backdrop-blur-md border-b border-[#D4AF37]/20 shadow-sm">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-[65px] relative">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-[104px] relative">
         
         {/* LOGO */}
         <Link 
@@ -33,10 +33,10 @@ export default function Navbar() {
           <Image
             src="/logo.png"
             alt="Pacific City Hotel"
-            width={200}
-            height={200}
+            width={400}
+            height={400}
             priority
-            className="h-[52px] sm:h-[58px] w-auto object-contain"
+            className="h-[88px] sm:h-[100px] w-auto object-contain"
           />
         </Link>
 
@@ -97,7 +97,7 @@ export default function Navbar() {
       {/* Overlay léger pour fermer en cliquant en dehors */}
       {isOpen && (
         <div 
-          className="lg:hidden fixed inset-0 top-[65px] z-40" 
+          className="lg:hidden fixed inset-0 top-[104px] z-40" 
           onClick={closeMenu}
           aria-hidden="true"
         />

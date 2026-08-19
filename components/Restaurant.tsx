@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useMemo, useRef, useState } from 'react';
-import { Flame, Leaf, GlassWater, Wine, Beer, Citrus } from 'lucide-react';
+import { Flame, Leaf, Wine, Beer, Citrus } from 'lucide-react';
 
 type Category = 'tous' | 'plats' | 'salades' | 'boissons';
 
@@ -31,7 +31,7 @@ const MENU: MenuItem[] = [
     category: 'plats',
     categoryLabel: 'Plat signature',
     description: 'Feuilles de ndolé mijotées, arachides, crevettes et viande de bœuf, servi avec plantain ou riz.',
-    image: 'https://images.unsplash.com/photo-1604909052743-94e838986d24?q=80&w=1200&auto=format&fit=crop',
+    image: '/restaurant/ndolet.webp',
     price: 6500,
     icon: Flame,
     signature: true,
@@ -42,7 +42,7 @@ const MENU: MenuItem[] = [
     category: 'plats',
     categoryLabel: 'Plat traditionnel',
     description: 'Poisson braisé mijoté dans une sauce tomate épicée, oignons et poivrons frais.',
-    image: 'https://images.unsplash.com/photo-1544025162-d76694265947?q=80&w=1200&auto=format&fit=crop',
+    image: '/restaurant/poisson braisse.webp',
     price: 5500,
     icon: Flame,
   },
@@ -52,7 +52,7 @@ const MENU: MenuItem[] = [
     category: 'salades',
     categoryLabel: 'Salade',
     description: 'Légumes de saison, avocat, œuf mollet et vinaigrette maison au citron vert.',
-    image: 'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?q=80&w=1200&auto=format&fit=crop',
+    image: '/restaurant/salade.webp',
     price: 3000,
     icon: Leaf,
   },
@@ -62,7 +62,7 @@ const MENU: MenuItem[] = [
     category: 'salades',
     categoryLabel: 'Salade',
     description: 'Mangue, concombre, tomate cerise et menthe fraîche, sauce miel-gingembre.',
-    image: 'https://images.unsplash.com/photo-1540420773420-3366772f4999?q=80&w=1200&auto=format&fit=crop',
+    image: '/restaurant/salade de fruit.webp',
     price: 2800,
     icon: Leaf,
   },
@@ -72,7 +72,7 @@ const MENU: MenuItem[] = [
     category: 'boissons',
     categoryLabel: 'Boisson brassicole',
     description: 'Sélection de bières artisanales brassées localement, blonde ou ambrée.',
-    image: 'https://images.unsplash.com/photo-1608270586620-248524c67de9?q=80&w=1200&auto=format&fit=crop',
+    image: '/restaurant/bierre artisanale.webp',
     price: 1500,
     icon: Beer,
   },
@@ -82,7 +82,7 @@ const MENU: MenuItem[] = [
     category: 'boissons',
     categoryLabel: 'Jus naturel',
     description: 'Pressé maison à base d\u2019hibiscus, gingembre frais et zeste de citron.',
-    image: 'https://images.unsplash.com/photo-1622597467836-f3285f2131b8?q=80&w=1200&auto=format&fit=crop',
+    image: '/restaurant/jus de bissap.webp',
     price: 1200,
     icon: Citrus,
   },
@@ -92,7 +92,7 @@ const MENU: MenuItem[] = [
     category: 'boissons',
     categoryLabel: 'Liqueur',
     description: 'Liqueur artisanale infusée aux fruits locaux, servie fraîche en digestif.',
-    image: 'https://images.unsplash.com/photo-1470337458703-46ad1756a187?q=80&w=1200&auto=format&fit=crop',
+    image: '/restaurant/liqueur.webp',
     price: 2500,
     icon: Wine,
   },
@@ -148,8 +148,11 @@ export default function Restaurant() {
           to { opacity: 1; transform: translateY(0) scale(1); }
         }
         .dish-card-animate {
-          animation: dishFadeIn 0.5s ease-out forwards;
+          animation: dishFadeIn 0.65s cubic-bezier(0.22, 1, 0.36, 1) forwards;
           opacity: 0;
+        }
+        @media (prefers-reduced-motion: reduce) {
+          .dish-card-animate { animation: none; opacity: 1; }
         }
       `}</style>
 
@@ -190,7 +193,10 @@ export default function Restaurant() {
     return (
       <div
         key={item.id}
-        className="bg-white rounded-2xl overflow-hidden shadow-lg"
+        className={`bg-white rounded-2xl overflow-hidden shadow-lg transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl ${
+          isVisible ? 'dish-card-animate' : 'opacity-0'
+        }`}
+        style={{ animationDelay: `${Number(item.id) * 100}ms` }}
       >
         <img
           src={item.image}
@@ -199,7 +205,7 @@ export default function Restaurant() {
         />
 
         <div className="p-5">
-          <h3 className="text-xl font-bold mb-2">
+          <h3 className="text-xl font-bold mb-2 text-gray-900">
             {item.name}
           </h3>
 

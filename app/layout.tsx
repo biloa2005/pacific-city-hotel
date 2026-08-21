@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata,Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
@@ -23,7 +23,7 @@ export const metadata: Metadata = {
 
   description:
     "Découvrez Pacific Hotel à Obala, près de Yaoundé. Chambres confortables, restaurant et services adaptés à vos séjours au Cameroun.",
-     themeColor: "#E5B83F",
+   
 
   keywords: [
     "Pacific Hotel",
@@ -47,6 +47,9 @@ export const metadata: Metadata = {
     index: true,
     follow: true,
   },
+};
+export const viewport: Viewport = {
+  themeColor: "#E5B83F",
 };
 
 export default function RootLayout({

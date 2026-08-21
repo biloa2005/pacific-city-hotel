@@ -186,45 +186,63 @@ export default function Restaurant() {
             chaque plat raconte une histoire du terroir.
           </p>
         </div>
-<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-  {filteredMenu.map((item) => {
-    const Icon = item.icon;
+        <div
+          key={activeFilter}
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8"
+        >
+          {filteredMenu.map((item, index) => {
+            const Icon = item.icon;
 
-    return (
-      <div
-        key={item.id}
-        className={`bg-white rounded-2xl overflow-hidden shadow-lg transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl ${
-          isVisible ? 'dish-card-animate' : 'opacity-0'
-        }`}
-        style={{ animationDelay: `${Number(item.id) * 100}ms` }}
-      >
-        <img
-          src={item.image}
-          alt={item.name}
-          className="w-full h-60 object-cover"
-        />
+            return (
+              <article
+                key={item.id}
+                className={`group flex h-full flex-col overflow-hidden rounded-[1.25rem] border border-white/10 bg-[#171411] shadow-[0_18px_45px_rgba(0,0,0,0.22)] transition-all duration-500 hover:-translate-y-2 hover:border-[#D4AF37]/50 hover:shadow-[0_24px_55px_rgba(0,0,0,0.4)] ${
+                  isVisible ? 'dish-card-animate' : 'opacity-0'
+                }`}
+                style={{ animationDelay: `${index * 100}ms` }}
+              >
+                <div className="relative aspect-[4/3] overflow-hidden bg-[#2a2118]">
+                  <img
+                    src={item.image}
+                    alt={item.name}
+                    className="h-full w-full object-cover object-center transition-transform duration-700 ease-out group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-transparent to-black/10" />
+                  <span className="absolute left-4 top-4 rounded-full border border-white/25 bg-black/45 px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[0.16em] text-white backdrop-blur-md">
+                    {item.categoryLabel}
+                  </span>
+                  {item.signature && (
+                    <span className="absolute right-4 top-4 rounded-full bg-[#D4AF37] px-3 py-1.5 text-[10px] font-bold uppercase tracking-[0.12em] text-[#171411]">
+                      Signature
+                    </span>
+                  )}
+                </div>
 
-        <div className="p-5">
-          <h3 className="text-xl font-bold mb-2 text-gray-900">
-            {item.name}
-          </h3>
+                <div className="flex flex-1 flex-col p-5 sm:p-6">
+                  <div className="mb-4 flex items-start justify-between gap-4">
+                    <h3 className="font-serif text-xl font-bold leading-tight text-[#F7F0E2]">
+                      {item.name}
+                    </h3>
+                    <span className="shrink-0 rounded-full bg-[#D4AF37]/12 px-2.5 py-1 text-xs font-bold text-[#E6C75A]">
+                      {item.price.toLocaleString('fr-FR')} FCFA
+                    </span>
+                  </div>
 
-          <p className="text-gray-600 mb-4">
-            {item.description}
-          </p>
+                  <p className="flex-1 text-sm leading-relaxed text-white/60">
+                    {item.description}
+                  </p>
 
-          <div className="flex items-center justify-between">
-            <span className="font-bold text-[#D4AF37]">
-              {item.price.toLocaleString("fr-FR")} FCFA
-            </span>
-
-            <Icon className="text-[#D4AF37]" />
-          </div>
+                  <div className="mt-6 flex items-center gap-3 border-t border-white/10 pt-4 text-xs uppercase tracking-[0.16em] text-white/40">
+                    <span className="flex h-9 w-9 items-center justify-center rounded-full border border-[#D4AF37]/35 text-[#D4AF37]">
+                      <Icon className="h-4 w-4" strokeWidth={1.8} />
+                    </span>
+                    <span>Préparé avec soin</span>
+                  </div>
+                </div>
+              </article>
+            );
+          })}
         </div>
-      </div>
-    );
-  })}
-</div>
 </div>
       </section>);
 }

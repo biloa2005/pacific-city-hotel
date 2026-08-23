@@ -15,7 +15,7 @@ export default function WhatsAppButton() {
     rounded-full bg-green-500 text-white shadow-lg transition-all duracion-300
     hover:scale-110 hover:bg-green-600"
     >
-<FaWhatsapp/>
+<FaWhatsapp size={30}/>
     </a>
   )
 }

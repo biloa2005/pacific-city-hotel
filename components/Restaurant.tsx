@@ -66,16 +66,16 @@ const MENU: MenuItem[] = [
     price: 2800,
     icon: Leaf,
   },
-  {
-    id: '5',
-    name: 'Bière Artisanale Locale',
-    category: 'boissons',
-    categoryLabel: 'Boisson brassicole',
-    description: 'Sélection de bières artisanales brassées localement, blonde ou ambrée.',
-    image: '/restaurant/bierre artisanale.webp',
-    price: 1500,
-    icon: Beer,
-  },
+  // {
+  //   id: '5',
+  //   name: 'Bière Artisanale Locale',
+  //   category: 'boissons',
+  //   categoryLabel: 'Boisson brassicole',
+  //   description: 'Sélection de bières artisanales brassées localement, blonde ou ambrée.',
+  //   image: '/restaurant/bierre artisanale.webp',
+  //   price: 1500,
+  //   icon: Beer,
+  // },
   {
     id: '6',
     name: 'Jus Naturel Bissap',
@@ -88,7 +88,7 @@ const MENU: MenuItem[] = [
   },
   {
     id: '7',
-    name: 'Liqueur Maison',
+    name: 'Liqueur',
     category: 'boissons',
     categoryLabel: 'Liqueur',
     description: 'Liqueur artisanale infusée aux fruits locaux, servie fraîche en digestif.',
@@ -157,20 +157,18 @@ export default function Restaurant() {
       `}</style>
 
       <div className="relative max-w-7xl mx-auto">
-        
+
         {/* EN-TÊTE DE SECTION */}
         <div className="text-center max-w-2xl mx-auto mb-14">
           <span
-            className={`inline-block text-[#D4AF37] text-xs tracking-[0.3em] uppercase font-semibold mb-4 transition-all duration-700 ease-out ${
-              isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
-            }`}
+            className={`inline-block text-[#D4AF37] text-xs tracking-[0.3em] uppercase font-semibold mb-4 transition-all duration-700 ease-out ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
+              }`}
           >
             Notre restaurant
           </span>
           <h2
-            className={`font-serif font-bold text-3xl sm:text-4xl lg:text-5xl text-white leading-tight mb-4 transition-all duration-700 delay-100 ease-out ${
-              isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
-            }`}
+            className={`font-serif font-bold text-3xl sm:text-4xl lg:text-5xl text-white leading-tight mb-4 transition-all duration-700 delay-100 ease-out ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
+              }`}
           >
             Une cuisine locale{' '}
             <span className="bg-gradient-to-r from-[#D4AF37] via-[#F3E5AB] to-[#AA7C11] bg-clip-text text-transparent">
@@ -178,9 +176,8 @@ export default function Restaurant() {
             </span>
           </h2>
           <p
-            className={`text-white/60 leading-relaxed transition-all duration-700 delay-200 ease-out ${
-              isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
-            }`}
+            className={`text-white/60 leading-relaxed transition-all duration-700 delay-200 ease-out ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
+              }`}
           >
             Des saveurs camerounaises authentiques aux boissons artisanales,
             chaque plat raconte une histoire du terroir.
@@ -196,9 +193,8 @@ export default function Restaurant() {
             return (
               <article
                 key={item.id}
-                className={`group flex h-full flex-col overflow-hidden rounded-[1.25rem] border border-white/10 bg-[#171411] shadow-[0_18px_45px_rgba(0,0,0,0.22)] transition-all duration-500 hover:-translate-y-2 hover:border-[#D4AF37]/50 hover:shadow-[0_24px_55px_rgba(0,0,0,0.4)] ${
-                  isVisible ? 'dish-card-animate' : 'opacity-0'
-                }`}
+                className={`group flex h-full flex-col overflow-hidden rounded-[1.25rem] border border-white/10 bg-[#171411] shadow-[0_18px_45px_rgba(0,0,0,0.22)] transition-all duration-500 hover:-translate-y-2 hover:border-[#D4AF37]/50 hover:shadow-[0_24px_55px_rgba(0,0,0,0.4)] ${isVisible ? 'dish-card-animate' : 'opacity-0'
+                  }`}
                 style={{ animationDelay: `${index * 100}ms` }}
               >
                 <div className="relative aspect-[4/3] overflow-hidden bg-[#2a2118]">
@@ -243,6 +239,6 @@ export default function Restaurant() {
             );
           })}
         </div>
-</div>
-      </section>);
+      </div>
+    </section>);
 }

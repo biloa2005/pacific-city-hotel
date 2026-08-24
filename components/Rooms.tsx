@@ -1,116 +1,97 @@
 'use client';
 
-import { useEffect, useMemo, useRef, useState } from 'react';
-import { Users, Maximize, Wifi, Bath, Coffee, Star } from 'lucide-react';
+import { useEffect, useRef, useState } from 'react';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation, Pagination, Autoplay } from 'swiper/modules';
+import {
+  Users,
+  Bath,
+  Coffee,
+  Star,
+  ChevronLeft,
+  ChevronRight,
+} from 'lucide-react';
 
-type Category = 'toutes' | 'suite' | 'baignoire' | 'standard';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
 
 interface Room {
   id: string;
+  plaque: string;
   name: string;
-  category: Exclude<Category, 'toutes'>;
   categoryLabel: string;
-  image: string;
+  images: [string, string];
   price: number;
   capacity: number;
-  size: number;
   amenities: string[];
   featured?: boolean;
 }
 
-const FILTERS: { key: Category; label: string }[] = [
-  { key: 'toutes', label: 'Toutes les chambres' },
-  { key: 'suite', label: 'Suites' },
-  { key: 'baignoire', label: 'Chambres avec Baignoire' },
-  { key: 'standard', label: 'Chambres Standard' },
-];
+// ======================================================
+// CHAMBRES
+// ======================================================
 
 const ROOMS: Room[] = [
   {
     id: '1',
+    plaque: '301',
     name: 'Suite Présidentielle',
-    category: 'suite',
     categoryLabel: 'Suite',
-    image: '/chambre/s1.webp',
+    images: ['/chambre/s1.webp', '/chambre/s2.webp'],
     price: 85000,
     capacity: 2,
-    size: 55,
-    amenities: ['Wifi', 'Baignoire', 'Salon privé'],
+    amenities: ['Baignoire', 'Salon privé'],
     featured: true,
   },
   {
-    id: '2',
-    name: 'Suite Junior',
-    category: 'suite',
-    categoryLabel: 'Suite',
-    image: '/chambre/s2.webp',
-    price: 65000,
-    capacity: 2,
-    size: 40,
-    amenities: ['Wifi', 'Baignoire', 'Coin salon'],
-  },
-  {
     id: '3',
+    plaque: '205',
     name: 'Chambre Prestige Baignoire',
-    category: 'baignoire',
     categoryLabel: 'Baignoire',
-    image: '/chambre/s3.webp',
+    images: ['/chambre/s3.webp', '/chambre/s4.webp'],
     price: 48000,
     capacity: 2,
-    size: 30,
-    amenities: ['Wifi', 'Baignoire', 'Vue jardin'],
-  },
-  {
-    id: '4',
-    name: 'Chambre Confort Baignoire',
-    category: 'baignoire',
-    categoryLabel: 'Baignoire',
-    image: '/chambre/m1.webp',
-    price: 42000,
-    capacity: 2,
-    size: 26,
-    amenities: ['Wifi', 'Baignoire'],
-  },
-  {
-    id: '5',
-    name: 'Chambre Standard Simple',
-    category: 'standard',
-    categoryLabel: 'Standard',
-    image: '/chambre/s4.webp',
-    price: 28000,
-    capacity: 1,
-    size: 20,
-    amenities: ['Wifi', 'Douche'],
+    amenities: ['Baignoire', 'Vue jardin'],
   },
   {
     id: '6',
+    plaque: '112',
     name: 'Chambre Standard Double',
-    category: 'standard',
     categoryLabel: 'Standard',
-    image: '/chambre/s5.webp',
+    images: ['/chambre/s5.webp', '/chambre/m1.webp'],
     price: 32000,
     capacity: 2,
-    size: 22,
-    amenities: ['Wifi', 'Douche'],
+    amenities: ['Douche'],
   },
 ];
 
-const AMENITY_ICONS: Record<string, typeof Wifi> = {
-  Wifi: Wifi,
+// ======================================================
+// ICÔNES DES ÉQUIPEMENTS
+// ======================================================
+
+const AMENITY_ICONS: Record<string, typeof Bath> = {
   Baignoire: Bath,
   Douche: Bath,
   'Salon privé': Coffee,
-  'Coin salon': Coffee,
   'Vue jardin': Coffee,
 };
+
+// ======================================================
+// COMPOSANT
+// ======================================================
 
 export default function Rooms() {
   const sectionRef = useRef<HTMLElement>(null);
   const [isVisible, setIsVisible] = useState(false);
-  const [activeFilter, setActiveFilter] = useState<Category>('toutes');
+
+  // ====================================================
+  // ANIMATION À L'APPARITION
+  // ====================================================
 
   useEffect(() => {
     const el = sectionRef.current;
+
     if (!el) return;
 
     const observer = new IntersectionObserver(
@@ -120,183 +101,349 @@ export default function Rooms() {
           observer.disconnect();
         }
       },
-      { threshold: 0.15 }
+      {
+        threshold: 0.15,
+      }
     );
 
     observer.observe(el);
+
     return () => observer.disconnect();
   }, []);
-
-  const filteredRooms = useMemo(() => {
-    if (activeFilter === 'toutes') return ROOMS;
-    return ROOMS.filter((room) => room.category === activeFilter);
-  }, [activeFilter]);
 
   return (
     <section
       ref={sectionRef}
       id="chambres"
-      className="relative w-full bg-white py-20 sm:py-28 px-6 overflow-hidden"
+      className="relative w-full bg-[#FAF9F6] py-20 sm:py-28 px-6 overflow-hidden"
     >
-      {/* Animation keyframes pour l'apparition des cartes au changement de filtre */}
-      <style>{`
-        @keyframes roomFadeIn {
-          from { opacity: 0; transform: translateY(20px) scale(0.98); }
-          to { opacity: 1; transform: translateY(0) scale(1); }
-        }
-        .room-card-animate {
-          animation: roomFadeIn 0.5s ease-out forwards;
-          opacity: 0;
-        }
-      `}</style>
+      {/* ==================================================
+          TEXTURE DE FOND
+      ================================================== */}
 
-      <div className="max-w-7xl mx-auto">
-        
-        {/* EN-TÊTE DE SECTION */}
-        <div className="text-center max-w-2xl mx-auto mb-14">
+      <div
+        className="pointer-events-none absolute inset-0 opacity-[0.025]"
+        style={{
+          backgroundImage:
+            'linear-gradient(#C9A227 1px, transparent 1px), linear-gradient(90deg, #C9A227 1px, transparent 1px)',
+          backgroundSize: '64px 64px',
+        }}
+      />
+
+      {/* Petites décorations dorées */}
+
+      <div className="pointer-events-none absolute -top-32 -left-32 w-80 h-80 rounded-full bg-[#D4AF37]/5 blur-3xl" />
+
+      <div className="pointer-events-none absolute -bottom-32 -right-32 w-80 h-80 rounded-full bg-[#D4AF37]/5 blur-3xl" />
+
+      {/* ==================================================
+          CONTENU PRINCIPAL
+      ================================================== */}
+
+      <div className="relative max-w-7xl mx-auto">
+
+        {/* ==================================================
+            EN-TÊTE
+        ================================================== */}
+
+        <div className="text-center max-w-2xl mx-auto mb-16">
+
+          {/* Petit titre */}
+
           <span
-            className={`inline-block text-[#D4AF37] text-xs tracking-[0.3em] uppercase font-semibold mb-4 transition-all duration-700 ease-out ${
-              isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
-            }`}
+            className={`inline-block text-[#B08A18] text-xs tracking-[0.3em] uppercase font-semibold mb-4 transition-all duration-700 ease-out ${isVisible
+              ? 'opacity-100 translate-y-0'
+              : 'opacity-0 translate-y-4'
+              }`}
           >
             Nos hébergements
           </span>
+
+          {/* Titre */}
+
           <h2
-            className={`font-serif font-bold text-3xl sm:text-4xl lg:text-5xl text-gray-900 leading-tight mb-4 transition-all duration-700 delay-100 ease-out ${
-              isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
-            }`}
+            className={`font-serif font-bold text-3xl sm:text-4xl lg:text-5xl text-[#1C1917] leading-tight mb-4 transition-all duration-700 delay-100 ease-out ${isVisible
+              ? 'opacity-100 translate-y-0'
+              : 'opacity-0 translate-y-6'
+              }`}
           >
-            Choisissez votre{' '}
-            <span className="bg-gradient-to-r from-[#D4AF37] via-[#AA7C11] to-[#D4AF37] bg-clip-text text-transparent">
-              chambre idéale
+            Trois univers,{' '}
+            <span className="bg-gradient-to-r from-[#B08A18] via-[#D4AF37] to-[#B08A18] bg-clip-text text-transparent">
+              une même exigence
             </span>
           </h2>
+
+          {/* Description */}
+
           <p
-            className={`text-gray-600 leading-relaxed transition-all duration-700 delay-200 ease-out ${
-              isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
-            }`}
+            className={`text-[#78716C] leading-relaxed transition-all duration-700 delay-200 ease-out ${isVisible
+              ? 'opacity-100 translate-y-0'
+              : 'opacity-0 translate-y-6'
+              }`}
           >
-            Du confort essentiel à l&apos;expérience suite, chaque chambre du
-            Pacific Hotel est pensée pour votre bien-être.
+            Suite, baignoire ou standard : chaque chambre du Pacific Hotel
+            porte sa propre plaque, son propre caractère.
           </p>
         </div>
 
-        {/* FILTRES */}
-        <div
-          className={`flex flex-wrap justify-center gap-2 sm:gap-3 mb-12 transition-all duration-700 delay-300 ease-out ${
-            isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
-          }`}
-        >
-          {FILTERS.map(({ key, label }) => (
-            <button
-              key={key}
-              type="button"
-              onClick={() => setActiveFilter(key)}
-              className={`px-5 py-2.5 rounded-full text-sm font-medium border transition-all duration-300 ${
-                activeFilter === key
-                  ? 'bg-[#D4AF37] border-[#D4AF37] text-black shadow-md shadow-[#D4AF37]/20'
-                  : 'bg-transparent border-gray-200 text-gray-600 hover:border-[#D4AF37] hover:text-[#D4AF37]'
-              }`}
-            >
-              {label}
-            </button>
-          ))}
-        </div>
+        {/* ==================================================
+            GRILLE DES CHAMBRES
+        ================================================== */}
 
-        {/* GRILLE DE CHAMBRES */}
-        <div
-          key={activeFilter}
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8"
-        >
-          {filteredRooms.map((room, index) => (
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+
+          {ROOMS.map((room, index) => (
             <div
               key={room.id}
-              className="room-card-animate group relative bg-white rounded-2xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-xl transition-shadow duration-300"
-              style={{ animationDelay: `${index * 100}ms` }}
+              className={`group relative bg-white rounded-3xl overflow-hidden border border-[#E7E2D8] shadow-sm transition-all duration-700 ease-out hover:border-[#D4AF37]/70 hover:shadow-xl hover:-translate-y-1 ${isVisible
+                ? 'opacity-100 translate-y-0'
+                : 'opacity-0 translate-y-10'
+                }`}
+              style={{
+                transitionDelay: `${index * 120}ms`,
+              }}
             >
-              {/* IMAGE */}
+
+              {/* ==================================================
+                  IMAGE / SWIPER
+              ================================================== */}
+
               <div className="relative aspect-[4/3] overflow-hidden">
-                <img
-                  src={room.image}
-                  alt={room.name}
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500 ease-out"
-                />
-                {/* Badge catégorie */}
-                <span className="absolute top-4 left-4 px-3 py-1 bg-white/90 backdrop-blur-sm rounded-full text-xs font-semibold text-gray-800">
-                  {room.categoryLabel}
-                </span>
-                {room.featured && (
-                  <span className="absolute top-4 right-4 flex items-center gap-1 px-3 py-1 bg-[#D4AF37] rounded-full text-xs font-semibold text-black">
-                    <Star className="w-3 h-3 fill-black" />
-                    Populaire
-                  </span>
-                )}
-              </div>
 
-              {/* CONTENU */}
-              <div className="p-6">
-                <h3 className="font-serif font-bold text-xl text-gray-900 mb-2">
-                  {room.name}
-                </h3>
+                <Swiper
+                  modules={[
+                    Navigation,
+                    Pagination,
+                    Autoplay,
+                  ]}
+                  navigation={{
+                    prevEl: `.prev-${room.id}`,
+                    nextEl: `.next-${room.id}`,
+                  }}
+                  pagination={{
+                    clickable: true,
+                    el: `.pag-${room.id}`,
+                  }}
+                  autoplay={{
+                    delay: 4500,
+                    disableOnInteraction: false,
+                  }}
+                  loop
+                  className="h-full w-full room-swiper"
+                >
 
-                {/* Infos rapides */}
-                <div className="flex items-center gap-4 text-xs text-gray-500 mb-4">
-                  <span className="flex items-center gap-1">
-                    <Users className="w-3.5 h-3.5" />
-                    {room.capacity} pers.
+                  {room.images.map((img, i) => (
+                    <SwiperSlide key={i}>
+
+                      <img
+                        src={img}
+                        alt={`${room.name} — vue ${i + 1}`}
+                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
+                      />
+
+                    </SwiperSlide>
+                  ))}
+
+                </Swiper>
+
+                {/* ==================================================
+                    VOILE SUR L'IMAGE
+                ================================================== */}
+
+                <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/35 via-transparent to-black/10 z-[5]" />
+
+                {/* ==================================================
+                    PLAQUE DE CHAMBRE
+                ================================================== */}
+
+                <div className="absolute top-4 left-4 z-10 flex items-center gap-2 px-3 py-1.5 bg-white/90 backdrop-blur-sm rounded-lg border border-[#D4AF37]/50 shadow-sm">
+
+                  <span className="font-serif text-[#9A7610] text-sm font-bold tracking-wider">
+                    N°{room.plaque}
                   </span>
-                  <span className="flex items-center gap-1">
-                    <Maximize className="w-3.5 h-3.5" />
-                    {room.size} m²
-                  </span>
+
                 </div>
 
-                {/* Équipements */}
+                {/* ==================================================
+                    BADGE POPULAIRE
+                ================================================== */}
+
+                {room.featured && (
+                  <span className="absolute top-4 right-14 z-10 flex items-center gap-1 px-3 py-1.5 bg-[#D4AF37] rounded-full text-xs font-semibold text-[#1C1917] shadow-md">
+
+                    <Star className="w-3 h-3 fill-[#1C1917]" />
+
+                    Populaire
+
+                  </span>
+                )}
+
+                {/* ==================================================
+                    FLÈCHE GAUCHE
+                ================================================== */}
+
+                <button
+                  aria-label="Image précédente"
+                  className={`prev-${room.id} absolute left-3 top-1/2 -translate-y-1/2 z-10 w-9 h-9 flex items-center justify-center rounded-full bg-white/90 backdrop-blur-sm text-[#1C1917] shadow-md opacity-0 group-hover:opacity-100 transition-all duration-300 hover:bg-[#D4AF37] hover:text-black hover:scale-105`}
+                >
+                  <ChevronLeft className="w-4 h-4" />
+                </button>
+
+                {/* ==================================================
+                    FLÈCHE DROITE
+                ================================================== */}
+
+                <button
+                  aria-label="Image suivante"
+                  className={`next-${room.id} absolute right-3 top-1/2 -translate-y-1/2 z-10 w-9 h-9 flex items-center justify-center rounded-full bg-white/90 backdrop-blur-sm text-[#1C1917] shadow-md opacity-0 group-hover:opacity-100 transition-all duration-300 hover:bg-[#D4AF37] hover:text-black hover:scale-105`}
+                >
+                  <ChevronRight className="w-4 h-4" />
+                </button>
+
+                {/* ==================================================
+                    PAGINATION
+                ================================================== */}
+
+                <div
+                  className={`pag-${room.id} absolute bottom-3 left-1/2 -translate-x-1/2 z-10 flex gap-1.5`}
+                />
+
+              </div>
+
+              {/* ==================================================
+                  CONTENU DE LA CARTE
+              ================================================== */}
+
+              <div className="p-6">
+
+                {/* ==================================================
+                    NOM + CATÉGORIE
+                ================================================== */}
+
+                <div className="flex items-start justify-between mb-2 gap-3">
+
+                  <h3 className="font-serif font-bold text-xl text-[#1C1917] leading-tight">
+                    {room.name}
+                  </h3>
+
+                  <span className="shrink-0 px-2.5 py-1 bg-[#D4AF37]/10 text-[#9A7610] rounded-md text-[10px] font-semibold uppercase tracking-wide">
+                    {room.categoryLabel}
+                  </span>
+
+                </div>
+
+                {/* ==================================================
+                    CAPACITÉ
+                ================================================== */}
+
+                <span className="flex items-center gap-1 text-xs text-[#78716C] mb-4">
+
+                  <Users className="w-3.5 h-3.5 text-[#B08A18]" />
+
+                  {room.capacity} personnes
+
+                </span>
+
+                {/* ==================================================
+                    ÉQUIPEMENTS
+                ================================================== */}
+
                 <div className="flex flex-wrap gap-2 mb-5">
+
                   {room.amenities.map((amenity) => {
-                    const Icon = AMENITY_ICONS[amenity] ?? Wifi;
+
+                    const Icon =
+                      AMENITY_ICONS[amenity] ?? Coffee;
+
                     return (
                       <span
                         key={amenity}
-                        className="flex items-center gap-1 px-2.5 py-1 bg-gray-50 rounded-md text-[11px] text-gray-600"
+                        className="flex items-center gap-1 px-2.5 py-1.5 bg-[#F5F2EA] border border-[#E7E2D8] rounded-md text-[11px] text-[#78716C]"
                       >
-                        <Icon className="w-3 h-3 text-[#D4AF37]" />
+
+                        <Icon className="w-3 h-3 text-[#B08A18]" />
+
                         {amenity}
+
                       </span>
                     );
+
                   })}
+
                 </div>
 
-                {/* Prix + CTA */}
-                <div className="flex items-center justify-between pt-4 border-t border-gray-100">
+                {/* ==================================================
+                    PRIX + BOUTON
+                ================================================== */}
+
+                <div className="flex items-center justify-between pt-4 border-t border-[#E7E2D8]">
+
                   <div>
-                    <p className="text-[10px] text-gray-400 uppercase tracking-wide">
+
+                    <p className="text-[10px] text-[#A8A29A] uppercase tracking-wide">
                       À partir de
                     </p>
-                    <p className="font-serif font-bold text-lg text-gray-900">
+
+                    <p className="font-serif font-bold text-lg text-[#1C1917]">
+
                       {room.price.toLocaleString('fr-FR')} FCFA
-                      <span className="text-xs font-normal text-gray-500"> /nuit</span>
+
+                      <span className="text-xs font-normal text-[#78716C]">
+                        {' '}
+                        /nuit
+                      </span>
+
                     </p>
+
                   </div>
+
                   <a
                     href="#contact"
-                    className="px-4 py-2 bg-black text-white text-xs font-semibold rounded-full hover:bg-[#D4AF37] hover:text-black transition-colors"
+                    className="px-4 py-2.5 bg-[#D4AF37] text-[#1C1917] text-xs font-semibold rounded-full shadow-sm hover:bg-[#B08A18] hover:text-white transition-all duration-300 hover:shadow-md"
                   >
                     Réserver
                   </a>
+
                 </div>
+
               </div>
+
             </div>
           ))}
-        </div>
 
-        {/* ÉTAT VIDE (sécurité si un filtre ne retourne rien) */}
-        {filteredRooms.length === 0 && (
-          <p className="text-center text-gray-500 py-12">
-            Aucune chambre disponible dans cette catégorie pour le moment.
-          </p>
-        )}
+        </div>
       </div>
+
+      {/* ==================================================
+          STYLE SWIPER
+      ================================================== */}
+
+      <style jsx global>{`
+
+        .room-swiper .swiper-pagination-bullet {
+          width: 6px;
+          height: 6px;
+          background: rgba(255, 255, 255, 0.75);
+          opacity: 1;
+          transition: all 0.25s ease;
+        }
+
+        .room-swiper .swiper-pagination-bullet-active {
+          background: #D4AF37;
+          width: 18px;
+          border-radius: 9999px;
+        }
+
+        .room-swiper .swiper-slide {
+          overflow: hidden;
+        }
+
+        .room-swiper img {
+          display: block;
+        }
+
+      `}</style>
+
     </section>
   );
 }

@@ -23,18 +23,18 @@ export default function Footer() {
 
       <div className="relative max-w-7xl mx-auto">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-8 pb-12">
-          
+
           {/* BLOC IDENTITÉ */}
           <div className="lg:col-span-1">
             <Link href="#" className="flex items-center gap-2 text-xl font-serif font-bold tracking-wide w-fit">
-               <Image
-                          src="/logo.png"
-                          alt="Pacific City Hotel"
-                          width={200}
-                          height={200}
-                          priority
-                          className="h-[52px] sm:h-[58px] w-auto object-contain"
-                        />
+              <Image
+                src="/logo.png"
+                alt="Pacific City Hotel"
+                width={200}
+                height={200}
+                priority
+                className="h-[52px] sm:h-[58px] w-auto object-contain"
+              />
               <span className="bg-gradient-to-r from-[#D4AF37] via-[#F3E5AB] to-[#AA7C11] bg-clip-text text-transparent">
                 Pacific Hotel
               </span>
@@ -44,13 +44,13 @@ export default function Footer() {
               cuisine locale sublimée et service attentionné.
             </p>
           </div>
-
           {/* NAVIGATION */}
           <div>
             <h4 className="text-white text-sm font-semibold uppercase tracking-wider mb-5">
               Navigation
             </h4>
-            <ul className="space-y-3">
+
+            <ul className="grid grid-cols-2 gap-x-6 gap-y-3">
               {NAV_LINKS.map((link) => (
                 <li key={link.name}>
                   <Link
@@ -63,7 +63,6 @@ export default function Footer() {
               ))}
             </ul>
           </div>
-
           {/* CONTACT */}
           <div>
             <h4 className="text-white text-sm font-semibold uppercase tracking-wider mb-5">
@@ -71,8 +70,8 @@ export default function Footer() {
             </h4>
             <ul className="space-y-4">
               <li>
-                
-                 <a href="tel:+123456789"
+
+                <a href="tel:+123456789"
                   className="flex items-start gap-2.5 text-sm text-white/50 hover:text-[#D4AF37] transition-colors"
                 >
                   <Phone className="w-4 h-4 mt-0.5 shrink-0" />
@@ -80,8 +79,8 @@ export default function Footer() {
                 </a>
               </li>
               <li>
-                
-                 <a href="mailto:contact@pacifichotel.cm"
+
+                <a href="mailto:contact@pacifichotel.cm"
                   className="flex items-start gap-2.5 text-sm text-white/50 hover:text-[#D4AF37] transition-colors"
                 >
                   <Mail className="w-4 h-4 mt-0.5 shrink-0" />
@@ -103,8 +102,8 @@ export default function Footer() {
             <p className="text-sm text-white/50 leading-relaxed mb-5">
               Notre équipe est disponible 24h/24 pour organiser votre arrivée.
             </p>
-            
-              <a href="#contact"
+
+            <a href="#contact"
               className="inline-flex items-center gap-1.5 px-5 py-2.5 bg-[#D4AF37] text-black text-sm font-semibold rounded-full hover:bg-[#F3E5AB] transition-colors"
             >
               Nous contacter
@@ -125,15 +124,15 @@ export default function Footer() {
           {/* Crédit développeur — discret */}
           <p className="text-xs text-white/30">
             Site conçu par{' '}
-            
-              <a href="mailto:biloaphilemon@gmail.com"
+
+            <a href="mailto:biloaphilemon@gmail.com"
               className="text-white/40 hover:text-[#D4AF37] transition-colors"
             >
               Biloa Philemon
             </a>
             {' · '}
-            
-             <a href="https://github.com/biloa2005"
+
+            <a href="https://github.com/biloa2005"
               target="_blank"
               rel="noopener noreferrer"
               className="text-white/40 hover:text-[#D4AF37] transition-colors"

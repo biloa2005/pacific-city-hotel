@@ -40,7 +40,7 @@ const ROOMS: Room[] = [
     name: 'Chambre Prestige Baignoire',
     categoryLabel: 'Baignoire',
     images: ['/chambre/b1.webp', '/chambre/b2.webp'],
-    price: 85000,
+    price: 15000,
   
     amenities: ['Baignoire/colonne'],
     featured: true,
@@ -51,7 +51,7 @@ const ROOMS: Room[] = [
     name: 'Suite Présidentielle',
     categoryLabel: 'Suite',
     images: ['/chambre/s3.webp', '/chambre/c2.webp'],
-    price: 48000,
+    price: 20000,
   
     amenities: ['Baignoire', 'Salon privé'],
   },
@@ -61,7 +61,7 @@ const ROOMS: Room[] = [
     name: 'Chambre Standard Double',
     categoryLabel: 'Standard',
     images: [ '/chambre/c1.webp','/chambre/m2.webp'],
-    price: 32000,
+    price: 10000,
    
     amenities: ['Douche'],
   },

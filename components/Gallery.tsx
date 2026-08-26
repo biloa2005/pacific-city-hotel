@@ -20,8 +20,8 @@ const GALLERY: GalleryImage[] = [
   {
     id: '2',
     src: '/gallerie/accueil.webp',
-    alt: 'Suite Présidentielle',
-    category: 'Chambres',
+    alt: 'Façade avant du Pacific Hotel',
+    category: 'Hôtel',
   },
   {
     id: '3',

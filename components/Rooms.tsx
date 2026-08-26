@@ -2,7 +2,8 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation, Pagination, Autoplay } from 'swiper/modules';
+import { Navigation, Pagination, Autoplay, EffectFade, } from 'swiper/modules';
+import 'swiper/css/effect-fade';
 import {
   Users,
   Bath,
@@ -211,35 +212,40 @@ export default function Rooms() {
               <div className="relative aspect-[4/3] overflow-hidden">
 
                 <Swiper
-                  modules={[
-                    Navigation,
-                    Pagination,
-                    Autoplay,
-                  ]}
-                  navigation={{
-                    prevEl: `.prev-${room.id}`,
-                    nextEl: `.next-${room.id}`,
-                  }}
-                  pagination={{
-                    clickable: true,
-                    el: `.pag-${room.id}`,
-                  }}
-                  autoplay={{
-                    delay: 4500,
-                    disableOnInteraction: false,
-                  }}
-                  loop
-                  className="h-full w-full room-swiper"
-                >
-
+  modules={[
+    Navigation,
+    Pagination,
+    Autoplay,
+    EffectFade,
+  ]}
+  effect="fade"
+  fadeEffect={{
+    crossFade: true,
+  }}
+  speed={1000}
+  navigation={{
+    prevEl: `.prev-${room.id}`,
+    nextEl: `.next-${room.id}`,
+  }}
+  pagination={{
+    clickable: true,
+    el: `.pag-${room.id}`,
+  }}
+  autoplay={{
+    delay: 4500,
+    disableOnInteraction: false,
+  }}
+  loop
+  className="h-full w-full room-swiper"
+>
                   {room.images.map((img, i) => (
                     <SwiperSlide key={i}>
 
                       <img
-                        src={img}
-                        alt={`${room.name} — vue ${i + 1}`}
-                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
-                      />
+  src={img}
+  alt={`${room.name} — vue ${i + 1}`}
+  className="w-full h-full object-cover room-image"
+/>
 
                     </SwiperSlide>
                   ))}
@@ -418,32 +424,7 @@ export default function Rooms() {
           STYLE SWIPER
       ================================================== */}
 
-      <style jsx global>{`
-
-        .room-swiper .swiper-pagination-bullet {
-          width: 6px;
-          height: 6px;
-          background: rgba(255, 255, 255, 0.75);
-          opacity: 1;
-          transition: all 0.25s ease;
-        }
-
-        .room-swiper .swiper-pagination-bullet-active {
-          background: #D4AF37;
-          width: 18px;
-          border-radius: 9999px;
-        }
-
-        .room-swiper .swiper-slide {
-          overflow: hidden;
-        }
-
-        .room-swiper img {
-          display: block;
-        }
-
-      `}</style>
-
+   
     </section>
   );
 }

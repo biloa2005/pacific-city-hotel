@@ -36,7 +36,7 @@ export default function Footer() {
                 className="h-[52px] sm:h-[58px] w-auto object-contain"
               />
               <span className="bg-gradient-to-r from-[#D4AF37] via-[#F3E5AB] to-[#AA7C11] bg-clip-text text-transparent">
-                Pacific Hotel
+                Pacific city Hotel
               </span>
             </Link>
             <p className="text-sm text-white/50 leading-relaxed mt-4 max-w-xs">

@@ -24,7 +24,7 @@ interface Room {
   categoryLabel: string;
   images: [string, string];
   price: number;
-  capacity: number;
+ 
   amenities: string[];
   featured?: boolean;
 }
@@ -37,32 +37,32 @@ const ROOMS: Room[] = [
   {
     id: '1',
     plaque: '301',
-    name: 'Suite Présidentielle',
-    categoryLabel: 'Suite',
-    images: ['/chambre/s1.webp', '/chambre/s2.webp'],
+    name: 'Chambre Prestige Baignoire',
+    categoryLabel: 'Baignoire',
+    images: ['/chambre/b1.webp', '/chambre/b2.webp'],
     price: 85000,
-    capacity: 2,
-    amenities: ['Baignoire', 'Salon privé'],
+  
+    amenities: ['Baignoire/colonne'],
     featured: true,
   },
   {
     id: '3',
     plaque: '205',
-    name: 'Chambre Prestige Baignoire',
-    categoryLabel: 'Baignoire',
-    images: ['/chambre/s3.webp', '/chambre/s4.webp'],
+    name: 'Suite Présidentielle',
+    categoryLabel: 'Suite',
+    images: ['/chambre/s3.webp', '/chambre/c2.webp'],
     price: 48000,
-    capacity: 2,
-    amenities: ['Baignoire', 'Vue jardin'],
+  
+    amenities: ['Baignoire', 'Salon privé'],
   },
   {
     id: '6',
     plaque: '112',
     name: 'Chambre Standard Double',
     categoryLabel: 'Standard',
-    images: ['/chambre/s5.webp', '/chambre/m1.webp'],
+    images: [ '/chambre/c1.webp','/chambre/m2.webp'],
     price: 32000,
-    capacity: 2,
+   
     amenities: ['Douche'],
   },
 ];
@@ -344,9 +344,9 @@ export default function Rooms() {
 
                 <span className="flex items-center gap-1 text-xs text-[#78716C] mb-4">
 
-                  <Users className="w-3.5 h-3.5 text-[#B08A18]" />
+                
 
-                  {room.capacity} personnes
+              
 
                 </span>
 

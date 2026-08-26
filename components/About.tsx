@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 import { MapPin, Award, Users, BedDouble } from 'lucide-react';
 
 const STATS = [
-  { icon: BedDouble, value: '42', label: 'Chambres & suites' },
+  { icon: BedDouble, value: '+42', label: 'Chambres & suites' },
   { icon: Award, value: '15', label: "Années d'excellence" },
   { icon: Users, value: '8K+', label: 'Voyageurs accueillis' },
 ];
@@ -91,7 +91,7 @@ export default function About() {
               isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
             }`}
           >
-            Depuis plus de 15 ans, le Pacific Hotel accueille voyageurs
+            Depuis plus de 15 ans, le Pacific city Hotel accueille voyageurs
             d&apos;affaires et familles au cœur d&apos;Obala. Chaque chambre,
             chaque plat, chaque échange avec notre équipe est pensé pour vous
             faire sentir attendu, et non simplement logé.

@@ -7,7 +7,7 @@ export default function Hero() {
   const [mounted, setMounted] = useState(false);
 
   const welcomeTexts = [
-    "Bienvenue au Pacific Hotel",
+    "Bienvenue au Pacific city Hotel",
     "Votre confort, notre priorité",
     "Vivez une expérience d'exception",
     "Le luxe au cœur d'Obala",
@@ -182,7 +182,7 @@ export default function Hero() {
           }`}
         >
           Chambres raffinées, gastronomie locale sublimée et service
-          attentionné, au cœur d&apos;Obala. Le Pacific Hotel vous accueille
+          attentionné, au cœur d&apos;Obala. Le Pacific city Hotel vous accueille
           comme chez vous — en mieux.
         </p>
 

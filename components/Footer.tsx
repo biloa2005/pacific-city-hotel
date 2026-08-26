@@ -71,20 +71,20 @@ export default function Footer() {
             <ul className="space-y-4">
               <li>
 
-                <a href="tel:+123456789"
+                <a href="tel:+237 651052543"
                   className="flex items-start gap-2.5 text-sm text-white/50 hover:text-[#D4AF37] transition-colors"
                 >
                   <Phone className="w-4 h-4 mt-0.5 shrink-0" />
-                  +123 456 789
+                  +237 651052543
                 </a>
               </li>
               <li>
 
-                <a href="mailto:contact@pacifichotel.cm"
+                <a href="mailto:pacificcity65@gmail.com"
                   className="flex items-start gap-2.5 text-sm text-white/50 hover:text-[#D4AF37] transition-colors"
                 >
                   <Mail className="w-4 h-4 mt-0.5 shrink-0" />
-                  contact@pacifichotel.cm
+                  pacificcity65@gmail.com
                 </a>
               </li>
               <li className="flex items-start gap-2.5 text-sm text-white/50">

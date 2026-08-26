@@ -83,11 +83,11 @@ export default function Navbar() {
             {/* Contact rapide */}
             <div className="p-3 border-t border-[#D4AF37]/20 bg-[#D4AF37]/5">
               <a 
-                href="tel:+123456789" 
+                href="tel:+237 651052543" 
                 className="flex items-center justify-center gap-2 w-full py-2.5 text-sm border border-[#D4AF37] text-[#D4AF37] rounded hover:bg-[#D4AF37] hover:text-black transition-all"
               >
                 <PhoneCall className="w-4 h-4" />
-                +237 456 789
+                +237 651052543
               </a>
             </div>
           </div>

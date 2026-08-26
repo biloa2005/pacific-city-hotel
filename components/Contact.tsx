@@ -24,23 +24,23 @@ function InstagramIcon({ className }: { className?: string }) {
 }
 
 const SOCIALS = [
-  { icon: FacebookIcon, label: 'Facebook', href: 'https://facebook.com' },
-  { icon: InstagramIcon, label: 'Instagram', href: 'https://instagram.com' },
-  { icon: MessageCircle, label: 'WhatsApp', href: 'https://wa.me/123456789' },
+  { icon: FacebookIcon, label: 'Facebook', href: 'https://www.facebook.com/profile.php?id=61593219600634' },
+  { icon: InstagramIcon, label: 'Instagram', href: 'https://www.instagram.com/hotel_pacific_city?igsi=dWIxeTN3b2dwaDF4' },
+  { icon: MessageCircle, label: 'WhatsApp', href: 'https://wa.me/237 651052543' },
 ];
 
 const CONTACT_INFO = [
   {
     icon: Phone,
     label: 'Téléphone',
-    value: '+123 456 789',
-    href: 'tel:+123456789',
+    value: '+237 651052543',
+    href: '+237 651052543',
   },
   {
     icon: Mail,
     label: 'Email',
-    value: 'contact@pacifichotel.cm',
-    href: 'mailto:contact@pacifichotel.cm',
+    value: 'pacificcity65@gmail.com',
+    href: 'mailto:pacificcity65@gmail.com',
   },
   {
     icon: MapPin,

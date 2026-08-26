@@ -61,7 +61,7 @@ export default function Hero() {
     return () => clearInterval(interval);
   }, [welcomeTexts.length]);
 
-  // Machine à écrire : display -> erasing -> typing -> display
+  //  écriture a grande taille : 
   useEffect(() => {
     let timeout: NodeJS.Timeout;
 

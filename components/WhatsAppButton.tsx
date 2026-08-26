@@ -12,7 +12,7 @@ export default function WhatsAppButton() {
   )}`;
 
   return (
-    <div className="fixed bottom-30 right-6 z-50">
+    <div className="fixed bottom-30 left-6 z-50">
   {/* Première onde */}
   <span className="absolute inset-0 rounded-full bg-green-500 animate-ping opacity-30 [animation-duration:2s]" />
 

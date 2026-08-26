@@ -196,7 +196,7 @@ export default function Hero() {
         >
           {/* CTA PRINCIPAL */}
           <a
-            href="#chambres"
+            href="#contact"
             className="px-8 py-3.5 bg-[#D4AF37] text-black font-semibold text-sm tracking-wide rounded-full hover:bg-[#F3E5AB] transition-all duration-300 hover:scale-105 shadow-lg shadow-[#D4AF37]/20"
           >
             Réserver mon séjour

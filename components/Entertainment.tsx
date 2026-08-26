@@ -89,7 +89,7 @@ export default function Entertainment() {
           observer.disconnect();
         }
       },
-      { threshold: 0.3}
+      { threshold: 0.19}
     );
 
     observer.observe(el);

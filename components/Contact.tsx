@@ -71,7 +71,7 @@ export default function Contact() {
           observer.disconnect();
         }
       },
-      { threshold: 0.3 }
+      { threshold: 0.19 }
     );
 
     observer.observe(el);

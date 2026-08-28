@@ -135,7 +135,7 @@ export default function Hero() {
   }, [mounted]);
 
   return (
-    <section className="relative h-[55vh] lg:h-screen w-full overflow-hidden bg-black">
+    <section className="relative h-[60vh] lg:h-screen w-full overflow-hidden bg-black">
 
       {/* IMAGE DE FOND */}
       <div
@@ -238,7 +238,7 @@ export default function Hero() {
 
       {/* INDICATEUR DE SCROLL */}
       <div
-        className={`absolute bottom-8 left-1/2 flex -translate-x-1/2 flex-col items-center gap-2 transition-opacity duration-1000 delay-[1500ms] ${
+        className={`absolute bottom-8 left-1/2 flex -translate-x-1/2 flex-col items-center gap-2 transition-opacity duration-1000 delay-[1500ms] hidden lg:block ${
           mounted ? 'opacity-100' : 'opacity-0'
         }`}
       >
@@ -246,7 +246,7 @@ export default function Hero() {
           Découvrir
         </span>
 
-        <ChevronDown className="h-4 w-4 animate-bounce text-[#D4AF37]" />
+        <ChevronDown className=" vh-4 w-4 animate-bounce text-[#D4AF37]" />
       </div>
 
      

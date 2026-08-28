@@ -45,11 +45,7 @@ const services: Service[] = [
     title: 'Restauration',
     icon: <UtensilsCrossed className="w-6 h-6" />,
   },
-  {
-    id: '6',
-    title: 'Wi-Fi Haut Débit',
-    icon: <Wifi className="w-6 h-6" />,
-  },
+  
 ];
 
 const quickInfo = [

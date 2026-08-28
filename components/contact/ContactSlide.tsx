@@ -1,29 +1,27 @@
 'use client';
 //composant room slide que j ai adapter pour gallerie 
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { EffectFade, Autoplay, Navigation, Pagination } from 'swiper/modules';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { EffectFade, Autoplay, Navigation } from 'swiper/modules';
+import { ChevronLeft, ChevronRight, Star } from 'lucide-react';
+import { useRef } from 'react';
+import type { Swiper as SwiperType } from 'swiper';
 
 import 'swiper/css';
 import 'swiper/css/effect-fade';
 import 'swiper/css/navigation';
-import 'swiper/css/pagination';
 
 const ROOM_IMAGES = [
-  
   'hero.webp',
-  
- 
-  
-  
   'about.webp',
 ];
 
 export default function Slide() {
+  const swiperRef = useRef<SwiperType | null>(null);
+
   return (
     <section className="relative w-full h-[55vh] lg:h-screen overflow-hidden bg-[#111111]">
       <Swiper
-        modules={[EffectFade, Autoplay, Navigation, Pagination]}
+        modules={[EffectFade, Autoplay, Navigation]}
         effect="fade"
         fadeEffect={{ crossFade: true }}
         autoplay={{ delay: 6000, disableOnInteraction: false }}
@@ -32,10 +30,8 @@ export default function Slide() {
           prevEl: '.room-slide-prev',
           nextEl: '.room-slide-next',
         }}
-        pagination={{
-          clickable: true,
-          bulletClass: 'room-slide-bullet',
-          bulletActiveClass: 'room-slide-bullet-active',
+        onSwiper={(swiper) => {
+          swiperRef.current = swiper;
         }}
         className="w-full h-full"
       >
@@ -44,11 +40,31 @@ export default function Slide() {
             <div className="relative w-full h-full">
               <img
                 src={src}
-                alt={`Chambre Pacific Hotel ${index + 1}`}
+                alt={`Pacific City Hotel ${index + 1}`}
                 className="w-full h-full object-cover"
               />
-              {/* Overlay doux pour la lisibilité des contrôles */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/10 to-black/30" />
+              {/* Overlay pour la lisibilité */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-black/30" />
+              
+              {/* Texte "Pacific City Hotel" en bas */}
+              <div className="absolute bottom-8 left-0 right-0 px-6 sm:px-8 lg:px-12">
+                <div className="max-w-7xl mx-auto">
+                  {/* Étoiles décoratives */}
+                  <div className="flex gap-1 mb-3">
+                    {[...Array(5)].map((_, i) => (
+                      <Star key={i} className="w-4 h-4 fill-[#D4AF37] text-[#D4AF37]" />
+                    ))}
+                  </div>
+                  
+                  <h2 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-bold text-white drop-shadow-lg tracking-wide">
+                    Pacific City Hotel
+                  </h2>
+                  
+                  <p className="text-white/80 text-sm sm:text-base mt-1 drop-shadow-md font-light tracking-wider">
+                    Obala, Cameroun
+                  </p>
+                </div>
+              </div>
             </div>
           </SwiperSlide>
         ))}
@@ -68,7 +84,23 @@ export default function Slide() {
         <ChevronRight size={22} />
       </button>
 
-
+      {/* Indicateurs de pagination personnalisés - 2 points */}
+      <div className="absolute bottom-24 left-1/2 -translate-x-1/2 z-10 flex items-center gap-2">
+        {ROOM_IMAGES.map((_, index) => (
+          <button
+            key={index}
+            className={`w-2 h-2 rounded-full transition-all duration-300 cursor-pointer ${
+              index === 0 ? 'w-6 bg-[#D4AF37]' : 'bg-white/40 hover:bg-white/60'
+            }`}
+            onClick={() => {
+              if (swiperRef.current) {
+                swiperRef.current.slideTo(index);
+              }
+            }}
+            aria-label={`Aller à l'image ${index + 1}`}
+          />
+        ))}
+      </div>
     </section>
   );
 }

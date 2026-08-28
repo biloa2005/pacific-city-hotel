@@ -86,11 +86,7 @@ export default function RoomSlide() {
                     </p>
                   </div>
 
-                  {/* Bouton Découvrir */}
-                  <button className="mt-8 px-8 py-3 border-2 border-[#D4AF37] text-white hover:bg-[#D4AF37] hover:text-black transition-all duration-300 rounded-lg text-sm font-medium tracking-wider uppercase group">
-                    Découvrir nos chambres
-                    <span className="inline-block ml-2 transition-transform group-hover:translate-x-1">→</span>
-                  </button>
+                
                 </div>
               </div>
 

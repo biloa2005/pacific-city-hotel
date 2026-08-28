@@ -208,7 +208,7 @@ export default function Hero() {
           comme chez vous — en mieux.
         </p>
 
-        {/* BOUTONS */}
+        {/* BOUTON*/}
         <div
           className={`mt-10 flex flex-col items-center gap-4 transition-all duration-1000 delay-[1200ms] ease-out sm:flex-row ${
             mounted

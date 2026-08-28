@@ -1,257 +1,226 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
-import { Phone, Mail, MapPin, MessageCircle, Clock } from 'lucide-react';
+import { useState, useEffect, useRef } from 'react';
+import Image from 'next/image';
 
-//--- ICONES SVG INLINE POUR LES RÉSEAUX SOCIAUX ---
-// Nous gardons les SVG inline pour éviter d'alourdir le bundle avec une librairie d'icônes supplémentaire.
-
-function FacebookIcon({ className }: { className?: string }) {
-  return (
-    <svg viewBox="0 0 24 24" fill="currentColor" className={className}>
-      <path d="M22 12.06C22 6.5 17.52 2 12 2S2 6.5 2 12.06c0 5.02 3.66 9.18 8.44 9.94v-7.03H7.9v-2.91h2.54V9.85c0-2.51 1.49-3.9 3.77-3.9 1.09 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56v1.89h2.78l-.44 2.91h-2.34V22c4.78-.76 8.44-4.92 8.44-9.94Z" />
-    </svg>
-  );
+interface RestaurantItem {
+  id: string;
+  title: string;
+  fileName: string;
 }
 
-function InstagramIcon({ className }: { className?: string }) {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className={className}>
-      <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
-      <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37Z" />
-      <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
-    </svg>
-  );
-}
-
-//--- CONFIGURATION DES DONNÉES ---
-
-const SOCIALS = [
-  { icon: FacebookIcon, label: 'Facebook', href: 'https://www.facebook.com/profile.php?id=61593219600634' },
-  { icon: InstagramIcon, label: 'Instagram', href: 'https://www.instagram.com/hotel_pacific_city?igsi=dWIxeTN3b2dwaDF4' },
-  { icon: MessageCircle, label: 'WhatsApp', href: 'https://wa.me/237651052543' },
-];
-
-const CONTACT_INFO = [
+const items: RestaurantItem[] = [
+  { id: '1', title: 'Facade avant', fileName: 'accueil.webp' },
+  { id: '2', title: 'Parking', fileName: 'vue.webp' },
   {
-    icon: Phone,
-    label: 'Téléphone',
-    value: '+237 651 052 543',
-    href: 'tel:+237651052543', // Format tel: pour les liens mobiles
+    id: '3',
+    title: 'Espace privée Restaurant',
+    fileName: 'reception prive.webp',
   },
   {
-    icon: Mail,
-    label: 'Email',
-    value: 'pacificcity65@gmail.com',
-    href: 'mailto:pacificcity65@gmail.com',
+    id: '4',
+    title: 'Salle de conference',
+    fileName: 'salle de conference.webp',
   },
   {
-    icon: MapPin,
-    label: 'Adresse',
-    value: "En face de la Mairie d'Obala, Obala, Cameroun",
-    href: undefined, // Pas de lien pour l'adresse ici
+    id: '5',
+    title: 'Espace detentes interieur',
+    fileName: 'repos.webp',
+  },
+  { id: '6', title: 'Balansoir', fileName: 'balansoire.webp' },
+  {
+    id: '7',
+    title: 'Entrer principale',
+    fileName: 'hero.webp',
   },
   {
-    icon: Clock,
-    label: 'Réception',
-    value: 'Ouverte 24h/24, 7j/7',
-    href: undefined,
+    id: '8',
+    title: 'Reception',
+    fileName: 'porte ancienne.webp',
   },
 ];
 
-//--- COMPOSANT PRINCIPAL ---
+export default function RestaurantGrid() {
+  const [selectedItem, setSelectedItem] =
+    useState<RestaurantItem | null>(null);
 
-export default function ContactClair() {
-  const sectionRef = useRef<HTMLElement>(null);
+  // État pour savoir si le composant est visible
   const [isVisible, setIsVisible] = useState(false);
 
-  // Animation au défilement (Intersection Observer)
-  useEffect(() => {
-    const el = sectionRef.current;
-    if (!el) return;
+  // Référence vers la section
+  const sectionRef = useRef<HTMLElement>(null);
 
+  // Animation lorsque la section entre dans l'écran
+  useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
           setIsVisible(true);
-          observer.disconnect(); // On ne joue l'animation qu'une seule fois
+
+          // On arrête d'observer après la première apparition
+          observer.disconnect();
         }
       },
-      { threshold: 0.15 } // Déclenche quand 15% de la section est visible
+      {
+        threshold: 0.15,
+      }
     );
 
-    observer.observe(el);
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
     return () => observer.disconnect();
+  }, []);
+
+  // Gestion de la touche Échap
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        setSelectedItem(null);
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+    };
   }, []);
 
   return (
     <section
       ref={sectionRef}
-      id="contact"
-      // CHANGEMENT : bg-white au lieu de bg-[#0B0B0B]
-      className="relative w-full bg-white py-20 sm:py-28 px-6 overflow-hidden transition-colors duration-500"
+      className="max-w-5xl mx-auto p-2 sm:p-4"
     >
-      {/* Motif de fond subtil pour la version claire (optionnel) */}
-      <div className="absolute inset-0 opacity-[0.03] pointer-events-none">
-        <svg width="100%" height="100%">
-          <defs>
-            <pattern id="dotted-pattern" width="20" height="20" patternUnits="userSpaceOnUse">
-              <circle cx="2" cy="2" r="1" fill="currentColor" className="text-neutral-900" />
-            </pattern>
-          </defs>
-          <rect width="100%" height="100%" fill="url(#dotted-pattern)" />
-        </svg>
-      </div>
+      {/* GRILLE */}
+      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-1.5 sm:gap-2 lg:gap-3 max-w-4xl mx-auto">
+        {items.map((item, index) => {
+          // Les éléments pairs viennent de gauche
+          const fromLeft = index % 2 === 0;
 
-      <div className="max-w-7xl mx-auto relative z-10">
-        
-        {/* EN-TÊTE DE SECTION */}
-        <div className="text-center max-w-2xl mx-auto mb-16">
-          <span
-            className={`inline-block text-[#D4AF37] text-xs tracking-[0.3em] uppercase font-semibold mb-4 transition-all duration-700 ease-out ${
-              isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
-            }`}
-          >
-            Contact
-          </span>
-          <h2
-            // CHANGEMENT : text-neutral-900 au lieu de text-white
-            className={`font-serif font-bold text-3xl sm:text-4xl lg:text-5xl text-neutral-900 leading-tight mb-5 transition-all duration-700 delay-100 ease-out ${
-              isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
-            }`}
-          >
-            Parlons de{' '}
-            <span className="bg-gradient-to-r from-[#D4AF37] via-[#F3E5AB] to-[#AA7C11] bg-clip-text text-transparent">
-              votre séjour
-            </span>
-          </h2>
-          <p
-            // CHANGEMENT : text-neutral-600 au lieu de text-white/60
-            className={`text-neutral-600 text-lg leading-relaxed transition-all duration-700 delay-200 ease-out ${
-              isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
-            }`}
-          >
-            Une question, une réservation ? Notre équipe vous répond avec
-            plaisir, à toute heure.
-          </p>
-        </div>
+          return (
+            <button
+              key={item.id}
+              onClick={() => setSelectedItem(item)}
+              style={{
+                transitionDelay: `${index * 100}ms`,
+              }}
+              className={`
+                group relative flex flex-col overflow-hidden
+                bg-black text-left
+                focus:outline-none
+                focus:ring-2
+                focus:ring-amber-500
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-stretch">
-          
-          {/* CARTE GOOGLE MAPS (gauche) */}
-          <div
-            // CHANGEMENT : border-neutral-200 au lieu de border-white/10
-            className={`relative rounded-2xl overflow-hidden min-h-[380px] lg:min-h-[520px] border border-neutral-200 shadow-lg transition-all duration-700 delay-200 ease-out ${
-              isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-8'
-            }`}
-          >
-            <iframe
-              title="Localisation du Pacific Hotel - En face de la Mairie d'Obala"
-              // URL factice, à remplacer par votre vrai lien embed Google Maps
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3979.7138384976!2d11.5312345!3d4.1678901!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x108bcf4f5f5f5f5f%3A0x5f5f5f5f5f5f5f5f!2sMairie%20d&#39;Obala!5e0!3m2!1sfr!2scm!4v1621234567890!5m2!1sfr!2scm"
-              className="absolute inset-0 w-full h-full grayscale-[20%] contrast-[1.02]"
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-              frameBorder="0"
-            />
+                transition-all
+                duration-700
+                ease-out
 
-            {/* Badge de localisation flottant (adapté au thème clair) */}
-            {/* CHANGEMENT : bg-white/95, border-neutral-200, text-neutral-900/60 */}
-            <div className="absolute bottom-5 left-5 right-5 sm:right-auto sm:max-w-xs bg-white/95 backdrop-blur-sm rounded-xl px-5 py-4 flex items-start gap-3.5 border border-neutral-200 shadow-xl">
-              <MapPin className="w-6 h-6 text-[#D4AF37] shrink-0 mt-0.5" />
-              <div>
-                <p className="text-sm font-semibold text-neutral-950">Pacific Hotel</p>
-                <p className="text-xs text-neutral-600 mt-1 line-height-relaxed">
-                  En face de la Mairie d'Obala,<br/>Obala, Cameroun
+                ${
+                  isVisible
+                    ? 'opacity-100 translate-x-0'
+                    : `opacity-0 ${
+                        fromLeft
+                          ? '-translate-x-20'
+                          : 'translate-x-20'
+                      }`
+                }
+              `}
+            >
+              {/* IMAGE */}
+              <div className="relative aspect-[4/3] w-full overflow-hidden">
+                <Image
+                  src={`/gallerie/${item.fileName}`}
+                  alt={item.title}
+                  fill
+                  sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
+                  className="object-cover transition-transform duration-300 group-hover:scale-105"
+                />
+
+                {/* OVERLAY */}
+                <div className="absolute inset-0 flex items-center justify-center bg-black/40 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+                  <div className="scale-75 transform rounded-full bg-black/30 p-2 backdrop-blur-sm transition-transform duration-300 group-hover:scale-100">
+                    <svg
+                      className="h-5 w-5 text-white sm:h-6 sm:w-6"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2.5"
+                        d="M12 4v16m8-8H4"
+                      />
+                    </svg>
+                  </div>
+                </div>
+              </div>
+
+              {/* TITRE */}
+              <div className="border-t border-gray-100 bg-white p-1.5 text-center sm:p-2">
+                <p className="truncate text-xs font-medium text-gray-800 sm:text-sm">
+                  {item.title}
                 </p>
               </div>
-            </div>
-          </div>
+            </button>
+          );
+        })}
+      </div>
 
-          {/* INFOS DE CONTACT (droite) */}
+      {/* MODAL */}
+      {selectedItem && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/75 p-4 backdrop-blur-sm"
+          onClick={() => setSelectedItem(null)}
+        >
           <div
-            className={`flex flex-col justify-between gap-10 transition-all duration-700 delay-300 ease-out ${
-              isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-8'
-            }`}
+            className="relative w-full max-w-md overflow-hidden rounded-2xl bg-white shadow-2xl sm:max-w-lg"
+            onClick={(e) => e.stopPropagation()}
           >
-            {/* Bloc infos */}
-            {/* CHANGEMENT : bg-neutral-50, border-neutral-200 au lieu de bg-white/[0.03]/border-white/10 */}
-            <div className="bg-neutral-50 border border-neutral-200 rounded-2xl p-7 sm:p-10 shadow-sm">
-              <div className="space-y-8">
-                {CONTACT_INFO.map(({ icon: Icon, label, value, href }, index) => {
-                  const content = (
-                    <div className="flex items-center gap-5 group">
-                      {/* CHANGEMENT : Hover bg-[#D4AF37] reste, mais l'icône devient blanche au survol */}
-                      <div className="shrink-0 w-12 h-12 rounded-full bg-[#D4AF37]/10 flex items-center justify-center group-hover:bg-[#D4AF37] transition-all duration-300 shadow-inner">
-                        <Icon className="w-5 h-5 text-[#D4AF37] group-hover:text-white transition-colors duration-300" />
-                      </div>
-                      <div>
-                        {/* CHANGEMENT : text-neutral-500 au lieu de text-white/40 */}
-                        <p className="text-[11px] text-neutral-500 uppercase tracking-widest font-medium mb-1">
-                          {label}
-                        </p>
-                        {/* CHANGEMENT : text-neutral-950 au lieu de text-white */}
-                        <p className="text-base sm:text-lg text-neutral-950 font-medium group-hover:text-[#D4AF37] transition-colors duration-300">
-                          {value}
-                        </p>
-                      </div>
-                    </div>
-                  );
+            {/* FERMER */}
+            <button
+              onClick={() => setSelectedItem(null)}
+              aria-label="Fermer la modal"
+              className="absolute top-3 right-3 z-10 rounded-full bg-black/50 p-2 text-white transition-colors hover:bg-black/80 focus:outline-none"
+            >
+              <svg
+                className="h-5 w-5"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M6 18L18 6M6 6l12 12"
+                />
+              </svg>
+            </button>
 
-                  return (
-                    <div
-                      key={label}
-                      className={`transition-all duration-500 ease-out ${
-                        isVisible
-                          ? 'opacity-100 translate-y-0'
-                          : 'opacity-0 translate-y-4'
-                      }`}
-                      style={{ transitionDelay: `${400 + index * 100}ms` }}
-                    >
-                      {href ? (
-                        <a href={href} className="block group">
-                          {content}
-                        </a>
-                      ) : (
-                        content
-                      )}
-                    </div>
-                  );
-                })}
-              </div>
+            {/* IMAGE MODAL */}
+            <div className="relative aspect-[4/3] w-full bg-gray-100">
+              <Image
+                src={`/gallerie/${selectedItem.fileName}`}
+                alt={selectedItem.title}
+                fill
+                sizes="(max-width: 768px) 100vw, 50vw"
+                className="object-cover"
+                priority
+              />
             </div>
 
-            {/* Réseaux sociaux */}
-            <div
-              className={`transition-all duration-500 ease-out ${
-                isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
-              }`}
-              style={{ transitionDelay: '800ms' }}
-            >
-              {/* CHANGEMENT : text-neutral-500 au lieu de text-white/40 */}
-              <p className="text-[11px] text-neutral-500 uppercase tracking-widest font-medium mb-5">
-                Suivez-nous
-              </p>
-              <div className="flex items-center gap-4">
-                {SOCIALS.map(({ icon: Icon, label, href }) => (
-                  <a
-                    key={label}
-                    href={href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label={label}
-                    // CHANGEMENT : border-neutral-300, text-neutral-600 au lieu de white/15 / white/70
-                    // Hover reste doré, mais text-white au lieu de text-black
-                    className="w-12 h-12 flex items-center justify-center rounded-full border border-neutral-300 text-neutral-600 hover:bg-[#D4AF37] hover:border-[#D4AF37] hover:text-white transition-all duration-300 hover:-translate-y-1 shadow-sm"
-                  >
-                    <Icon className="w-5 h-5" />
-                  </a>
-                ))}
-              </div>
+            {/* TITRE MODAL */}
+            <div className="bg-white p-4 text-center">
+              <h3 className="text-xl font-bold text-gray-900">
+                {selectedItem.title}
+              </h3>
             </div>
           </div>
         </div>
-      </div>
+      )}
     </section>
   );
 }

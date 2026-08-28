@@ -8,6 +8,7 @@ import Gallery from "@/components/Gallery";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 import ScrollToTop from "@/components/ScrollToTop";
+import ServicesSection from "@/components/Service";
 export default function Home() {
   return (
    <>
@@ -18,9 +19,10 @@ export default function Home() {
      <About/>
      {/* <Rooms/>
      <Restaurant/>   */}
-     <Entertainment/>
+     {/* <Entertainment/> */}
      {/* <Gallery/>
      <Contact/> */}
+     <ServicesSection/>
      <Footer/>
           
    </div>

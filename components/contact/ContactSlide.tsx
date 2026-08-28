@@ -21,7 +21,7 @@ const ROOM_IMAGES = [
 
 export default function Slide() {
   return (
-    <section className="relative w-full h-[55vh] lg:h-screen overflow-hidden bg-[#111111] mt-1">
+    <section className="relative w-full h-[55vh] lg:h-screen overflow-hidden bg-[#111111]">
       <Swiper
         modules={[EffectFade, Autoplay, Navigation, Pagination]}
         effect="fade"

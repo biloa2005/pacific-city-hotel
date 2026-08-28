@@ -12,15 +12,15 @@ export default function Home() {
   return (
    <>
    <div className="">
- <ScrollToTop/>
+ 
      <Navbar/>
      <Hero/>
      <About/>
      {/* <Rooms/>
      <Restaurant/>   */}
      <Entertainment/>
-     <Gallery/>
-     <Contact/>
+     {/* <Gallery/>
+     <Contact/> */}
      <Footer/>
           
    </div>

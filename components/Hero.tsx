@@ -7,7 +7,7 @@ export default function Hero() {
   const [mounted, setMounted] = useState(false);
 
   const welcomeTexts = [
-    "Bienvenue au Pacific city Hotel",
+    "Bienvenue au Pacific City Hotel",
     "Votre confort, notre priorité",
     "Vivez une expérience d'exception",
     "Le luxe au cœur d'Obala",
@@ -33,21 +33,9 @@ export default function Hero() {
   ];
 
   const [currentText, setCurrentText] = useState(0);
-
-  // --- Machine à écrire pour le titre principal ---
   const [currentTitle, setCurrentTitle] = useState(0);
-  const [phase, setPhase] = useState<'display' | 'erasing' | 'typing'>('display');
 
-  const activeTitle = heroTitles[currentTitle];
-  const maxLen = (title: { line1: string; line2: string }) =>
-    Math.max(title.line1.length, title.line2.length);
-
-  const [charCount, setCharCount] = useState(maxLen(heroTitles[0]));
-
-  const displayedLine1 = activeTitle.line1.slice(0, charCount);
-  const displayedLine2 = activeTitle.line2.slice(0, charCount);
-
-  // Animation d'apparition initiale
+  // Déclenchement des animations d'apparition progressive à l'ouverture
   useEffect(() => {
     setMounted(true);
   }, []);
@@ -61,37 +49,14 @@ export default function Hero() {
     return () => clearInterval(interval);
   }, [welcomeTexts.length]);
 
-  //  écriture a grande taille : 
+  // Changement automatique du titre principal
   useEffect(() => {
-    let timeout: NodeJS.Timeout;
+    const interval = setInterval(() => {
+      setCurrentTitle((prev) => (prev + 1) % heroTitles.length);
+    }, 5000);
 
-    if (phase === 'display') {
-      timeout = setTimeout(() => {
-        setPhase('erasing');
-      }, 3500);
-    } else if (phase === 'erasing') {
-      if (charCount > 0) {
-        timeout = setTimeout(() => {
-          setCharCount((prev) => prev - 1);
-        }, 30);
-      } else {
-        setCurrentTitle((prev) => (prev + 1) % heroTitles.length);
-        setPhase('typing');
-      }
-    } else if (phase === 'typing') {
-      const target = maxLen(activeTitle);
-
-      if (charCount < target) {
-        timeout = setTimeout(() => {
-          setCharCount((prev) => prev + 1);
-        }, 55);
-      } else {
-        setPhase('display');
-      }
-    }
-
-    return () => clearTimeout(timeout);
-  }, [phase, charCount, activeTitle, heroTitles.length]);
+    return () => clearInterval(interval);
+  }, [heroTitles.length]);
 
   return (
     <section className="relative min-h-screen w-full overflow-hidden bg-black">
@@ -109,12 +74,13 @@ export default function Hero() {
 
       {/* CONTENU */}
       <div className="relative z-10 flex min-h-screen flex-col items-center justify-center px-6 text-center">
-        {/* ÉTOILES + TEXTE DYNAMIQUE */}
+        
+        {/* BLOC 1 : ÉTOILES + TEXTE DYNAMIQUE (Apparaît en 1er) */}
         <div
-          className={`mb-6 flex flex-col sm:flex-row items-center gap-2 transition-all duration-700 ease-out ${
+          className={`mb-6 flex flex-col sm:flex-row items-center gap-2 transition-all duration-1000 delay-100 ease-out ${
             mounted
               ? 'opacity-100 translate-y-0'
-              : 'opacity-0 translate-y-4'
+              : 'opacity-0 translate-y-6'
           }`}
         >
           {/* 5 ÉTOILES */}
@@ -127,7 +93,7 @@ export default function Hero() {
             ))}
           </div>
 
-          {/* TEXTE QUI CHANGE */}
+          {/* TEXTE DYNAMIQUE */}
           <div className="relative h-6 overflow-hidden flex items-center justify-center">
             <span
               key={currentText}
@@ -138,63 +104,43 @@ export default function Hero() {
           </div>
         </div>
 
-        {/* TITRE PRINCIPAL — MACHINE À ÉCRIRE */}
+        {/* BLOC 2 : TITRE PRINCIPAL (Apparaît en 2ème) */}
         <h1
-          className={`font-serif font-bold leading-[1.05] text-white transition-opacity duration-700 ease-out ${
-            mounted ? 'opacity-100' : 'opacity-0'
+          className={`font-serif font-bold leading-[1.05] text-white transition-all duration-1000 delay-500 ease-out ${
+            mounted
+              ? 'opacity-100 translate-y-0'
+              : 'opacity-0 translate-y-8'
           }`}
         >
-          {/* PREMIÈRE LIGNE */}
-          <span
-            className={`block text-4xl sm:text-6xl lg:text-7xl transition-all duration-700 delay-150 ease-out ${
-              mounted
-                ? 'opacity-100 translate-y-0'
-                : 'opacity-0 translate-y-8'
-            }`}
-          >
-            {displayedLine1}
-            {phase !== 'display' && charCount <= activeTitle.line1.length && (
-              <span className="inline-block w-[2px] h-[0.9em] bg-white/70 ml-1 align-middle animate-pulse" />
-            )}
+          <span className="block text-4xl sm:text-6xl lg:text-7xl">
+            {heroTitles[currentTitle].line1}
           </span>
-
-          {/* DEUXIÈME LIGNE */}
-          <span
-            className={`block text-4xl sm:text-6xl lg:text-7xl mt-1 sm:mt-2 bg-gradient-to-r from-[#D4AF37] via-[#F3E5AB] to-[#AA7C11] bg-clip-text text-transparent transition-all duration-700 delay-300 ease-out ${
-              mounted
-                ? 'opacity-100 translate-y-0'
-                : 'opacity-0 translate-y-8'
-            }`}
-          >
-            {displayedLine2}
-            {phase !== 'display' && charCount > activeTitle.line1.length && (
-              <span className="inline-block w-[2px] h-[0.9em] bg-[#D4AF37] ml-1 align-middle animate-pulse" />
-            )}
+          <span className="block text-4xl sm:text-6xl lg:text-7xl mt-1 sm:mt-2 bg-gradient-to-r from-[#D4AF37] via-[#F3E5AB] to-[#AA7C11] bg-clip-text text-transparent">
+            {heroTitles[currentTitle].line2}
           </span>
         </h1>
 
-        {/* SOUS-TITRE */}
+        {/* BLOC 3 : PARAGRAPHE DE DESCRIPTION (Apparaît en 3ème) */}
         <p
-          className={`mt-6 max-w-xl text-base sm:text-lg text-white/80 leading-relaxed transition-all duration-700 delay-500 ease-out ${
+          className={`mt-6 max-w-xl text-base sm:text-lg text-white/80 leading-relaxed transition-all duration-1000 delay-[900ms] ease-out ${
             mounted
               ? 'opacity-100 translate-y-0'
-              : 'opacity-0 translate-y-6'
+              : 'opacity-0 translate-y-8'
           }`}
         >
           Chambres raffinées, gastronomie locale sublimée et service
-          attentionné, au cœur d&apos;Obala. Le Pacific city Hotel vous accueille
+          attentionné, au cœur d&apos;Obala. Le Pacific City Hotel vous accueille
           comme chez vous — en mieux.
         </p>
 
-        {/* BOUTONS */}
+        {/* BLOC 4 : BOUTONS D'ACTION (Apparaissent en 4ème) */}
         <div
-          className={`mt-10 flex flex-col sm:flex-row items-center gap-4 transition-all duration-700 delay-700 ease-out ${
+          className={`mt-10 flex flex-col sm:flex-row items-center gap-4 transition-all duration-1000 delay-[1200ms] ease-out ${
             mounted
               ? 'opacity-100 translate-y-0'
-              : 'opacity-0 translate-y-6'
+              : 'opacity-0 translate-y-8'
           }`}
         >
-          {/* CTA PRINCIPAL */}
           <a
             href="#contact"
             className="px-8 py-3.5 bg-[#D4AF37] text-black font-semibold text-sm tracking-wide rounded-full hover:bg-[#F3E5AB] transition-all duration-300 hover:scale-105 shadow-lg shadow-[#D4AF37]/20"
@@ -202,7 +148,6 @@ export default function Hero() {
             Réserver mon séjour
           </a>
 
-          {/* CTA SECONDAIRE */}
           <a
             href="#a-propos"
             className="px-8 py-3.5 border border-white/30 text-white font-semibold text-sm tracking-wide rounded-full hover:bg-white/10 hover:border-white/50 transition-all duration-300 hover:scale-105"
@@ -212,16 +157,15 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* INDICATEUR DE SCROLL */}
+      {/* INDICATEUR DE SCROLL (Apparaît en dernier) */}
       <div
-        className={`absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 transition-opacity duration-700 delay-[1000ms] ${
+        className={`absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 transition-opacity duration-1000 delay-[1500ms] ${
           mounted ? 'opacity-100' : 'opacity-0'
         }`}
       >
         <span className="text-white/50 text-[10px] tracking-[0.25em] uppercase">
           Découvrir
         </span>
-
         <ChevronDown className="w-4 h-4 text-[#D4AF37] animate-bounce" />
       </div>
 

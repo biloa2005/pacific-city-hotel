@@ -42,7 +42,7 @@ const ROOM_EQUIPMENTS: Record<RoomCategory, EquipmentItem[]> = {
     { id: '1', name: 'Wi-Fi Haut Débit Gratuit', icon: Wifi },
     { id: '2', name: 'Télévision HD avec Chaines Satellite', icon: Tv },
     { id: '3', name: 'Climatisation', icon: Wind },
-    { id: '4', name: 'Bouilloire avec Sélection de Thés', icon: Coffee },
+    { id: '4', name: 'Bouilloire avec Sélection de Thé', icon: Coffee },
     { id: '5', name: 'Salle de Bain Privative avec Douche', icon: Bath },
     { id: '6', name: 'Coffre-fort Sécurisé', icon: ShieldCheck },
   ],

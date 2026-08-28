@@ -41,7 +41,7 @@ export default function About() {
         
         {/* IMAGE */}
         <div
-          className={`relative order-2 lg:order-1 transition-all duration-700 ease-out ${
+          className={`relative order-2 lg:order-1 transition-all duration-700 ease-out hidden md:block ${
             isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-8'
           }`}
         >

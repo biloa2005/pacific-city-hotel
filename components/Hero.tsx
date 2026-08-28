@@ -135,7 +135,7 @@ export default function Hero() {
   }, [mounted]);
 
   return (
-    <section className="relative min-h-screen w-full overflow-hidden bg-black">
+    <section className="relative h-[55vh] lg:h-screen w-full overflow-hidden bg-black">
 
       {/* IMAGE DE FOND */}
       <div

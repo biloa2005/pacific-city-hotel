@@ -31,11 +31,9 @@ export default function RestaurantGrid() {
   }, []);
 
   return (
-    <section className="max-w-6xl mx-auto p-2 sm:p-4">
-    
-
-      {/* Grille 3 colonnes avec espace réduit */}
-      <div className="grid grid-cols-3 gap-1.5 sm:gap-3">
+    <section className="max-w-4xl mx-auto p-2 sm:p-4">
+      {/* Grille responsive */}
+      <div className="grid grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-1.5 sm:gap-2 lg:gap-3 max-w-3xl mx-auto">
         {items.map((item) => (
           <button
             key={item.id}
@@ -48,7 +46,7 @@ export default function RestaurantGrid() {
                 src={`/restaurant/${item.fileName}`}
                 alt={item.title}
                 fill
-                sizes="(max-width: 768px) 33vw, 30vw"
+                sizes="(max-width: 768px) 33vw, 25vw"
                 className="object-cover transition-transform duration-300 group-hover:scale-105"
               />
 
@@ -56,7 +54,7 @@ export default function RestaurantGrid() {
               <div className="absolute inset-0 bg-black/40 opacity-0 transition-opacity duration-300 group-hover:opacity-100 flex items-center justify-center">
                 <div className="p-2 rounded-full bg-black/30 backdrop-blur-sm transform scale-75 transition-transform duration-300 group-hover:scale-100">
                   <svg
-                    className="w-6 h-6 text-white"
+                    className="w-5 h-5 sm:w-6 sm:h-6 text-white"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -65,7 +63,7 @@ export default function RestaurantGrid() {
                       strokeLinecap="round"
                       strokeLinejoin="round"
                       strokeWidth="2.5"
-                      d="M12 4v16m8-8H4" // Icône Plus / Croix (+)
+                      d="M12 4v16m8-8H4"
                     />
                   </svg>
                 </div>
@@ -89,7 +87,7 @@ export default function RestaurantGrid() {
           onClick={() => setSelectedItem(null)}
         >
           <div
-            className="relative w-full max-w-lg bg-white rounded-2xl overflow-hidden shadow-2xl transition-all"
+            className="relative w-full max-w-md sm:max-w-lg bg-white rounded-2xl overflow-hidden shadow-2xl transition-all"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Bouton de fermeture (Croix) */}

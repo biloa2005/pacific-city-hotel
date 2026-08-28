@@ -8,7 +8,7 @@ const NAV_LINKS = [
   { name: 'Accueil', href: '#' },
   { name: 'À propos', href: '#a-propos' },
   // { name: 'Services', href: '#services' },
-  { name: 'Chambres', href: '#chambres' },
+  { name: 'Chambres', href: '/chambres' },
   { name: 'Restaurant', href: '#restaurant' },
   { name: 'Divertissement', href: '#divertissement' },
   { name: 'Galerie', href: '#galerie' },

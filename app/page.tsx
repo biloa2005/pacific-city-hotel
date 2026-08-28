@@ -16,8 +16,8 @@ export default function Home() {
      <Navbar/>
      <Hero/>
      <About/>
-     <Rooms/>
-     <Restaurant/>  
+     {/* <Rooms/>
+     <Restaurant/>   */}
      <Entertainment/>
      <Gallery/>
      <Contact/>

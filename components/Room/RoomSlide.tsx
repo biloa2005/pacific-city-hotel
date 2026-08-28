@@ -68,22 +68,7 @@ export default function RoomSlide() {
         <ChevronRight size={22} />
       </button>
 
-      <style>{`
-        .room-slide-bullet {
-          width: 8px;
-          height: 8px;
-          border-radius: 9999px;
-          background: rgba(255, 255, 255, 0.5);
-          display: inline-block;
-          margin: 0 4px;
-          cursor: pointer;
-          transition: all 0.3s ease;
-        }
-        .room-slide-bullet-active {
-          background: #D4AF37;
-          width: 24px;
-        }
-      `}</style>
+     
     </section>
   );
 }

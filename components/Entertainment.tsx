@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
+import Image from 'next/image';
 import {
   Waves,
   Palette,
@@ -8,6 +9,7 @@ import {
   TreePine,
   MapPin,
   ArrowUpRight,
+  LucideIcon,
 } from 'lucide-react';
 
 interface Activity {
@@ -16,7 +18,7 @@ interface Activity {
   tag: string;
   description: string;
   image: string;
-  icon: typeof Waves;
+  icon: LucideIcon;
   distance?: string;
 }
 
@@ -24,7 +26,7 @@ const ACTIVITIES: Activity[] = [
   {
     id: '1',
     name: 'Chutes de Nachtigal',
-    tag: 'Nature & aventure',
+    tag: 'Nature & Aventure',
     description:
       "De puissants rapides sur le fleuve Sanaga, à quelques kilomètres d'Obala. Une excursion en pirogue s'impose pour admirer ce spectacle naturel au cœur de la forêt.",
     image: '/decouverte/natchigal.webp',
@@ -33,8 +35,8 @@ const ACTIVITIES: Activity[] = [
   },
   {
     id: '2',
-    name: 'Artisanat local',
-    tag: 'Culture & savoir-faire',
+    name: 'Artisanat Local',
+    tag: 'Culture & Savoir-faire',
     description:
       "Marchés et ateliers d'artisans où poteries, sculptures sur bois et tissages traditionnels racontent le patrimoine de la région du Centre.",
     image: '/decouverte/artisanat.webp',
@@ -44,9 +46,9 @@ const ACTIVITIES: Activity[] = [
   {
     id: '3',
     name: 'Complexe Lafleur',
-    tag: 'Loisirs & spectacle',
+    tag: 'Loisirs & Spectacle',
     description:
-      "Piscine, glacier, grillades, cave et snack-bar réunis en un seul lieu, avec des spectacles de cabaret chaque week-end pour une soirée animée.",
+      'Piscine, glacier, grillades, cave et snack-bar réunis en un seul lieu, avec des spectacles de cabaret chaque week-end.',
     image: '/decouverte/lafleur.webp',
     icon: Music2,
     distance: 'Obala',
@@ -54,19 +56,19 @@ const ACTIVITIES: Activity[] = [
   {
     id: '4',
     name: 'Le BayaMa',
-    tag: 'Détente au vert',
+    tag: 'Détente au Vert',
     description:
-      "Un cadre idyllique et convivial, très prisé pour se ressourcer au vert et déguster des produits locaux dans une ambiance paisible.",
+      'Un cadre idyllique et convivial, très prisé pour se ressourcer au vert et déguster des produits locaux dans une ambiance paisible.',
     image: '/decouverte/bayama.webp',
     icon: TreePine,
     distance: 'Obala',
   },
   {
     id: '5',
-    name: 'La Tradition du Vin de Palme',
-    tag: 'vin de palme',
+    name: 'Tradition du Vin de Palme',
+    tag: 'Patrimoine Gastronomique',
     description:
-      "Assistez au savoir-faire ancestral de la récolte du vin blanc (vin de palme). Au cœur de la nature, rencontrez nos passionnés locaux qui perpétuent cette tradition unique et dégustez une boisson fraîche et authentique au lever du jour.",
+      'Assistez au savoir-faire ancestral de la récolte du vin de palme au lever du jour et dégustez une boisson authentique.',
     image: '/decouverte/vin.webp',
     icon: MapPin,
     distance: 'Obala',
@@ -79,148 +81,179 @@ export default function Entertainment() {
 
   useEffect(() => {
     const el = sectionRef.current;
-
     if (!el) return;
 
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
           setIsVisible(true);
-          observer.disconnect();
+          observer.disconnect(); // On anime une seule fois
         }
       },
-      { threshold: 0.19}
+      { 
+        // AJUSTEMENT ICI : L'animation se déclenche quand 60% de la section est visible.
+        // Cela laisse le temps à l'utilisateur de "rentrer" dans la zone avant le scale.
+        threshold: 0.20 
+      }
     );
 
     observer.observe(el);
-
     return () => observer.disconnect();
   }, []);
+
+  const primaryActivity = ACTIVITIES[0];
+  const secondaryActivities = ACTIVITIES.slice(1);
 
   return (
     <section
       ref={sectionRef}
       id="divertissement"
-      className="relative w-full bg-[#FAF8F3] py-20 sm:py-28 px-6 overflow-hidden"
+      className="relative w-full bg-[#FDFBF7] text-stone-900 py-24 sm:py-32 px-6 sm:px-12 overflow-hidden selection:bg-[#D4AF37] selection:text-white"
     >
-      <div className="max-w-7xl mx-auto">
+      {/* Halo lumineux subtil de fond */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-96 bg-[#D4AF37]/10 blur-[140px] pointer-events-none" />
 
+      <div className="max-w-7xl mx-auto relative z-10">
+        
         {/* EN-TÊTE DE SECTION */}
-        <div className="text-center max-w-2xl mx-auto mb-14">
-          <span
-            className={`inline-block text-[#D4AF37] text-xs tracking-[0.3em] uppercase font-semibold mb-4 transition-all duration-700 ease-out ${isVisible
-              ? 'opacity-100 translate-y-0'
-              : 'opacity-0 translate-y-4'
-              }`}
+        <div className="max-w-3xl mb-16 sm:mb-20">
+          <div
+            className={`flex items-center gap-3 mb-4 transition-all duration-1000 ease-out ${
+              isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
+            }`}
           >
-            Autour de l&apos;hôtel
-          </span>
+            <span className="h-[1px] w-8 bg-[#D4AF37]" />
+            <span className="text-[#D4AF37] text-xs uppercase tracking-[0.3em] font-semibold">
+              Expériences & Découvertes
+            </span>
+          </div>
 
           <h2
-            className={`font-serif font-bold text-3xl sm:text-4xl lg:text-5xl text-gray-900 leading-tight mb-4 transition-all duration-700 delay-100 ease-out ${isVisible
-              ? 'opacity-100 translate-y-0'
-              : 'opacity-0 translate-y-6'
-              }`}
+            className={`font-serif text-3xl sm:text-5xl lg:text-6xl font-light tracking-wide text-stone-900 leading-[1.15] mb-6 transition-all duration-1000 delay-100 ease-out ${
+              isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+            }`}
           >
-            À découvrir{' '}
-            <span className="bg-gradient-to-r from-[#D4AF37] via-[#AA7C11] to-[#D4AF37] bg-clip-text text-transparent">
-              à Obala
-            </span>
+            Autour de l’hôtel <br />
+            <span className="italic font-normal text-[#D4AF37]">à Obala</span>
           </h2>
 
           <p
-            className={`text-gray-600 leading-relaxed transition-all duration-700 delay-200 ease-out ${isVisible
-              ? 'opacity-100 translate-y-0'
-              : 'opacity-0 translate-y-6'
-              }`}
+            className={`text-stone-600 text-base sm:text-lg font-light leading-relaxed max-w-2xl transition-all duration-1000 delay-200 ease-out ${
+              isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+            }`}
           >
-            Entre nature, culture et vie locale, Obala offre bien plus
-            qu&apos;une étape : une véritable expérience à vivre pendant votre
-            séjour.
+            Entre nature luxuriante, savoir-faire ancestral et moments d’évasion, découvrez les joyaux de notre région sélectionnés pour sublimer votre séjour.
           </p>
         </div>
 
-        {/* GRILLE DES ACTIVITÉS */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8">
-
-          {/* CARTE PRINCIPALE */}
+        {/* GRILLE DES ACTIVITÉS AVEC ANIMATION RALENTIE (SCALE) */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8">
+          
+          {/* CARTE HERO / PRINCIPALE */}
           <div
-            className={`lg:col-span-2 lg:row-span-2 group relative rounded-2xl overflow-hidden min-h-[320px] sm:min-h-[420px] transition-all duration-700 delay-200 ease-out ${isVisible
-              ? 'opacity-100 translate-y-0'
-              : 'opacity-0 translate-y-8'
-              }`}
+            className={`lg:col-span-7 group relative h-[480px] sm:h-[600px] rounded-lg overflow-hidden border border-stone-200/80 bg-white shadow-sm hover:shadow-xl transition-all duration-[1500ms] ease-[cubic-bezier(0.22,1,0.36,1)] ${
+              // Animation de scale 'petite -> grande' avec opacité
+              isVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-90'
+            }`}
+            style={{ 
+              // Délai initial généreux pour l'en-tête, augmenté à 600ms
+              transitionDelay: isVisible ? '600ms' : '0ms' 
+            }}
           >
-            <img
-              src={ACTIVITIES[0].image}
-              alt={ACTIVITIES[0].name}
-              className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
+            <Image
+              src={primaryActivity.image}
+              alt={primaryActivity.name}
+              fill
+              sizes="(max-width: 1024px) 100vw, 60vw"
+              className="object-cover transition-transform duration-1000 ease-out group-hover:scale-105"
+              priority
             />
 
-            <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-stone-950/85 via-stone-950/30 to-transparent transition-opacity duration-500 group-hover:opacity-90" />
+            
+            <div className="relative h-full flex flex-col justify-between p-8 sm:p-10 z-10">
+              <div className="flex justify-between items-start">
+                <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/80 backdrop-blur-md border border-white/40 text-xs text-stone-800 tracking-wider font-medium shadow-sm">
+                  <primaryActivity.icon className="w-3.5 h-3.5 text-[#D4AF37]" />
+                  {primaryActivity.tag}
+                </span>
 
-            <div className="relative h-full flex flex-col justify-end p-6 sm:p-8">
-              <span className="inline-flex items-center gap-1.5 w-fit px-3 py-1 bg-[#D4AF37]/90 rounded-full text-[11px] font-semibold text-black mb-3">
-                <Waves className="w-3 h-3" />
-                {ACTIVITIES[0].tag}
-              </span>
+                <div className="w-10 h-10 rounded-full bg-white/80 backdrop-blur-md border border-white/40 flex items-center justify-center text-stone-900 opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0 transition-all duration-500 shadow-sm">
+                  <ArrowUpRight className="w-5 h-5 text-[#D4AF37]" />
+                </div>
+              </div>
 
-              <h3 className="font-serif font-bold text-2xl sm:text-3xl text-white mb-2">
-                {ACTIVITIES[0].name}
-              </h3>
+              <div className="translate-y-2 group-hover:translate-y-0 transition-transform duration-500">
+                <h3 className="font-serif text-2xl sm:text-4xl text-white mb-3 font-normal tracking-wide">
+                  {primaryActivity.name}
+                </h3>
+                
+                <p className="text-stone-200 text-sm sm:text-base line-clamp-3 leading-relaxed max-w-xl font-light mb-6">
+                  {primaryActivity.description}
+                </p>
 
-              <p className="text-white/70 text-sm leading-relaxed max-w-md">
-                {ACTIVITIES[0].description}
-              </p>
-
-              <span className="flex items-center gap-1 text-xs text-[#D4AF37] mt-4">
-                <MapPin className="w-3.5 h-3.5" />
-                {ACTIVITIES[0].distance}
-              </span>
+                {primaryActivity.distance && (
+                  <div className="inline-flex items-center gap-2 text-xs text-[#E6C687] uppercase tracking-widest pt-4 border-t border-white/20 w-full font-medium">
+                    <MapPin className="w-3.5 h-3.5" />
+                    {primaryActivity.distance}
+                  </div>
+                )}
+              </div>
             </div>
           </div>
 
-          {/* AUTRES CARTES */}
-          {ACTIVITIES.slice(1).map((activity, index) => {
-            const Icon = activity.icon;
+          {/* GRILLE SECONDAIRE */}
+          <div className="lg:col-span-5 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-6 sm:gap-8">
+            {secondaryActivities.map((activity, index) => {
+              const Icon = activity.icon;
 
-            return (
-              <div
-                key={activity.id}
-                className={`group relative rounded-2xl overflow-hidden min-h-[200px] transition-all duration-700 ease-out ${isVisible
-                  ? 'opacity-100 translate-y-0'
-                  : 'opacity-0 translate-y-8'
+              return (
+                <div
+                  key={activity.id}
+                  className={`group relative h-[280px] sm:h-[284px] rounded-lg overflow-hidden border border-stone-200/80 bg-white shadow-sm hover:shadow-xl transition-all duration-[1500ms] ease-[cubic-bezier(0.22,1,0.36,1)] ${
+                    isVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-90'
                   }`}
-                style={{
-                  transitionDelay: `${300 + index * 120}ms`,
-                }}
-              >
-                <img
-                  src={activity.image}
-                  alt={activity.name}
-                  className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
-                />
+                  style={{
+                    // Délais progressifs augmentés pour que l'utilisateur voie la cascade
+                    // Base 800ms + 250ms par carte supplémentaire
+                    transitionDelay: isVisible ? `${800 + index * 250}ms` : '0ms',
+                  }}
+                >
+                  <Image
+                    src={activity.image}
+                    alt={activity.name}
+                    fill
+                    sizes="(max-width: 1024px) 100vw, 40vw"
+                    className="object-cover transition-transform duration-1000 ease-out group-hover:scale-105"
+                  />
 
-                <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-stone-950/85 via-stone-950/40 to-transparent transition-opacity duration-500 group-hover:opacity-90" />
 
-                <div className="relative h-full flex flex-col justify-end p-5">
-                  <span className="inline-flex items-center gap-1.5 w-fit px-2.5 py-1 bg-[#D4AF37]/90 rounded-full text-[10px] font-semibold text-black mb-2">
-                    <Icon className="w-3 h-3" />
-                    {activity.tag}
-                  </span>
+                  <div className="relative h-full flex flex-col justify-between p-6 z-10">
+                    <div className="flex justify-between items-start">
+                      <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/80 backdrop-blur-md border border-white/40 text-[11px] text-stone-800 tracking-wider font-medium shadow-sm">
+                        <Icon className="w-3 h-3 text-[#D4AF37]" />
+                        {activity.tag}
+                      </span>
+                      
+                      <ArrowUpRight className="w-4 h-4 text-[#E6C687] opacity-60 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-300" />
+                    </div>
 
-                  <h3 className="font-serif font-bold text-lg text-white mb-1.5 flex items-center gap-1.5">
-                    {activity.name}
+                    <div>
+                      <h3 className="font-serif text-xl text-white mb-2 font-normal tracking-wide group-hover:text-[#E6C687] transition-colors duration-300">
+                        {activity.name}
+                      </h3>
 
-                    <ArrowUpRight className="w-4 h-4 text-[#D4AF37] opacity-0 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-300" />
-                  </h3>
-
-                  <p className="text-white/65 text-xs leading-relaxed line-clamp-2">
-                    {activity.description}
-                  </p>
+                      <p className="text-stone-300 text-xs sm:text-sm line-clamp-2 leading-relaxed font-light">
+                        {activity.description}
+                      </p>
+                    </div>
+                  </div>
                 </div>
-              </div>
-            );
-          })}
+              );
+            })}
+          </div>
+
         </div>
       </div>
     </section>

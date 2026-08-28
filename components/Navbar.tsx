@@ -11,7 +11,7 @@ const NAV_LINKS = [
   { name: 'Chambres', href: 'chambres' },
   { name: 'Saveurs & Bar', href: 'restaurant' },
   { name: 'Divertissement', href: '#divertissement' },
-  { name: 'Galerie', href: 'galerie' },
+  { name: 'Galerie', href: 'gallerie' },
   { name: 'Contact', href: 'contact' },
 ];
 

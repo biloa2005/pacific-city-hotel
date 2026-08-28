@@ -24,7 +24,7 @@ export default function About() {
           observer.disconnect(); // se déclenche une seule fois
         }
       },
-      { threshold: 0.3 }
+      { threshold: 0.2 }
     );
 
     observer.observe(el);

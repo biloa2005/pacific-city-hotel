@@ -3,149 +3,139 @@
 import { useEffect, useState } from 'react';
 import { ChevronDown, Star } from 'lucide-react';
 
+const welcomeTexts = [
+  'Bienvenue au Pacific City Hotel',
+  'Votre confort, notre priorité',
+  "Vivez une expérience d'exception",
+  "Le luxe au cœur d'Obala",
+];
+
+const heroTitles = [
+  {
+    line1: "L'art de recevoir,",
+    line2: 'réinventé pour vous',
+  },
+  {
+    line1: "Un séjour d'exception,",
+    line2: 'à votre image',
+  },
+  {
+    line1: 'Le confort absolu,',
+    line2: "au cœur d'Obala",
+  },
+  {
+    line1: 'Chaque détail compte,',
+    line2: 'pour votre bien-être',
+  },
+];
+
 export default function Hero() {
   const [mounted, setMounted] = useState(false);
-
-  const welcomeTexts = [
-    "Bienvenue au Pacific City Hotel",
-    "Votre confort, notre priorité",
-    "Vivez une expérience d'exception",
-    "Le luxe au cœur d'Obala",
-  ];
-
-  const heroTitles = [
-    {
-      line1: "L'art de recevoir,",
-      line2: "réinventé pour vous",
-    },
-    {
-      line1: "Un séjour d'exception,",
-      line2: "à votre image",
-    },
-    {
-      line1: "Le confort absolu,",
-      line2: "au cœur d'Obala",
-    },
-    {
-      line1: "Chaque détail compte,",
-      line2: "pour votre bien-être",
-    },
-  ];
-
   const [currentText, setCurrentText] = useState(0);
 
-  // État du titre animé
   const [currentTitle, setCurrentTitle] = useState(0);
   const [displayedLine1, setDisplayedLine1] = useState('');
   const [displayedLine2, setDisplayedLine2] = useState('');
-  const [isDeleting, setIsDeleting] = useState(false);
-  const [isTyping, setIsTyping] = useState(true);
+  const [phase, setPhase] = useState('typing');
 
-  // Déclenchement des animations
+  // Animation d'apparition
   useEffect(() => {
     setMounted(true);
   }, []);
 
-  // Changement automatique du sous-titre dynamique
+  // Changement du texte de bienvenue
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentText((prev) => (prev + 1) % welcomeTexts.length);
     }, 4000);
 
     return () => clearInterval(interval);
-  }, [welcomeTexts.length]);
+  }, []);
 
   // Animation du titre lettre par lettre
   useEffect(() => {
     const current = heroTitles[currentTitle];
-
     let timeout;
 
-    // ==========================
-    // PHASE 1 : ÉCRITURE
-    // ==========================
-    if (isTyping && !isDeleting) {
-      const fullText1 = current.line1;
-      const fullText2 = current.line2;
-
-      // Écrire la première ligne
-      if (displayedLine1.length < fullText1.length) {
+    // ÉCRITURE DE LA PREMIÈRE LIGNE
+    if (phase === 'typing-line1') {
+      if (displayedLine1.length < current.line1.length) {
         timeout = setTimeout(() => {
           setDisplayedLine1(
-            fullText1.slice(0, displayedLine1.length + 1)
+            current.line1.slice(0, displayedLine1.length + 1)
           );
-        }, 55);
-      }
-
-      // Une fois ligne 1 terminée, écrire ligne 2
-      else if (displayedLine2.length < fullText2.length) {
-        timeout = setTimeout(() => {
-          setDisplayedLine2(
-            fullText2.slice(0, displayedLine2.length + 1)
-          );
-        }, 55);
-      }
-
-      // Texte entièrement écrit
-      else {
-        timeout = setTimeout(() => {
-          setIsTyping(false);
-          setIsDeleting(true);
-        }, 3700);
+        }, 70);
+      } else {
+        setPhase('typing-line2');
       }
     }
 
-    // ==========================
-    // PHASE 2 : EFFACEMENT
-    // ==========================
-    else if (isDeleting) {
-      // Effacer d'abord la deuxième ligne
-      if (displayedLine2.length > 0) {
+    // ÉCRITURE DE LA DEUXIÈME LIGNE
+    if (phase === 'typing-line2') {
+      if (displayedLine2.length < current.line2.length) {
         timeout = setTimeout(() => {
           setDisplayedLine2(
-            displayedLine2.slice(0, -1)
+            current.line2.slice(0, displayedLine2.length + 1)
           );
-        }, 30);
-      }
-
-      // Ensuite effacer la première ligne
-      else if (displayedLine1.length > 0) {
+        }, 70);
+      } else {
         timeout = setTimeout(() => {
-          setDisplayedLine1(
-            displayedLine1.slice(0, -1)
-          );
-        }, 30);
+          setPhase('waiting');
+        }, 3000);
       }
+    }
 
-      // Quand tout est effacé
-      else {
+    // PHASE D'ATTENTE
+    if (phase === 'waiting') {
+      timeout = setTimeout(() => {
+        setPhase('deleting-line2');
+      }, 3000);
+    }
+
+    // EFFACEMENT DE LA DEUXIÈME LIGNE
+    if (phase === 'deleting-line2') {
+      if (displayedLine2.length > 0) {
         timeout = setTimeout(() => {
-          setCurrentTitle(
-            (prev) => (prev + 1) % heroTitles.length
-          );
+          setDisplayedLine2((prev) => prev.slice(0, -1));
+        }, 40);
+      } else {
+        setPhase('deleting-line1');
+      }
+    }
 
-          setIsDeleting(false);
-          setIsTyping(true);
-        }, 400);
+    // EFFACEMENT DE LA PREMIÈRE LIGNE
+    if (phase === 'deleting-line1') {
+      if (displayedLine1.length > 0) {
+        timeout = setTimeout(() => {
+          setDisplayedLine1((prev) => prev.slice(0, -1));
+        }, 40);
+      } else {
+        setCurrentTitle((prev) => (prev + 1) % heroTitles.length);
+        setPhase('typing-line1');
       }
     }
 
     return () => clearTimeout(timeout);
   }, [
+    phase,
     displayedLine1,
     displayedLine2,
     currentTitle,
-    isDeleting,
-    isTyping,
-    heroTitles,
   ]);
+
+  // Démarrage de l'animation après le montage
+  useEffect(() => {
+    if (mounted) {
+      setPhase('typing-line1');
+    }
+  }, [mounted]);
 
   return (
     <section className="relative min-h-screen w-full overflow-hidden bg-black">
 
       {/* IMAGE DE FOND */}
       <div
-        className="absolute inset-0 bg-cover bg-center scale-105"
+        className="absolute inset-0 scale-105 bg-cover bg-center"
         style={{
           backgroundImage: "url('/hero.webp')",
         }}
@@ -160,57 +150,57 @@ export default function Hero() {
 
         {/* ÉTOILES + TEXTE */}
         <div
-          className={`mb-6 flex flex-col sm:flex-row items-center gap-2 transition-all duration-1000 delay-100 ease-out ${
+          className={`mb-6 flex flex-col items-center gap-2 transition-all duration-1000 delay-100 ease-out sm:flex-row ${
             mounted
-              ? 'opacity-100 translate-y-0'
-              : 'opacity-0 translate-y-6'
+              ? 'translate-y-0 opacity-100'
+              : 'translate-y-6 opacity-0'
           }`}
         >
-          {/* 5 ÉTOILES */}
           <div className="flex gap-1">
             {[...Array(5)].map((_, i) => (
               <Star
                 key={i}
-                className="w-4 h-4 fill-[#D4AF37] text-[#D4AF37]"
+                className="h-4 w-4 fill-[#D4AF37] text-[#D4AF37]"
               />
             ))}
           </div>
 
-          {/* TEXTE DYNAMIQUE */}
-          <div className="relative h-6 overflow-hidden flex items-center justify-center">
+          <div className="relative flex h-6 items-center justify-center overflow-hidden">
             <span
               key={currentText}
-              className="animate-[welcome_0.6s_ease-out] text-[#D4AF37] text-xs tracking-[0.2em] uppercase font-medium text-center"
+              className="animate-[welcome_0.6s_ease-out] text-center text-xs font-medium uppercase tracking-[0.2em] text-[#D4AF37]"
             >
               {welcomeTexts[currentText]}
             </span>
           </div>
         </div>
 
-        {/* TITRE PRINCIPAL AVEC EFFET MACHINE À ÉCRIRE */}
+        {/* TITRE PRINCIPAL */}
         <h1
           className={`font-serif font-bold leading-[1.05] text-white transition-all duration-1000 delay-500 ease-out ${
             mounted
-              ? 'opacity-100 translate-y-0'
-              : 'opacity-0 translate-y-8'
+              ? 'translate-y-0 opacity-100'
+              : 'translate-y-8 opacity-0'
           }`}
         >
-          <span className="block text-4xl sm:text-6xl lg:text-7xl min-h-[1.2em]">
+          <span className="block min-h-[1.2em] text-4xl sm:text-6xl lg:text-7xl">
             {displayedLine1}
-            <span className="inline-block w-[2px] h-[0.8em] bg-[#D4AF37] ml-1 animate-pulse" />
           </span>
 
-          <span className="block text-4xl sm:text-6xl lg:text-7xl mt-1 sm:mt-2 min-h-[1.2em] bg-gradient-to-r from-[#D4AF37] via-[#F3E5AB] to-[#AA7C11] bg-clip-text text-transparent">
+          <span className="mt-1 block min-h-[1.2em] bg-gradient-to-r from-[#D4AF37] via-[#F3E5AB] to-[#AA7C11] bg-clip-text text-4xl text-transparent sm:mt-2 sm:text-6xl lg:text-7xl">
             {displayedLine2}
+
+            {/* Curseur */}
+            <span className="ml-1 inline-block h-[0.8em] w-[2px] animate-pulse bg-[#D4AF37]" />
           </span>
         </h1>
 
-        {/* PARAGRAPHE */}
+        {/* DESCRIPTION */}
         <p
-          className={`mt-6 max-w-xl text-base sm:text-lg text-white/80 leading-relaxed transition-all duration-1000 delay-[900ms] ease-out ${
+          className={`mt-6 max-w-xl text-base leading-relaxed text-white/80 transition-all duration-1000 delay-[900ms] ease-out sm:text-lg ${
             mounted
-              ? 'opacity-100 translate-y-0'
-              : 'opacity-0 translate-y-8'
+              ? 'translate-y-0 opacity-100'
+              : 'translate-y-8 opacity-0'
           }`}
         >
           Chambres raffinées, gastronomie locale sublimée et service
@@ -220,22 +210,22 @@ export default function Hero() {
 
         {/* BOUTONS */}
         <div
-          className={`mt-10 flex flex-col sm:flex-row items-center gap-4 transition-all duration-1000 delay-[1200ms] ease-out ${
+          className={`mt-10 flex flex-col items-center gap-4 transition-all duration-1000 delay-[1200ms] ease-out sm:flex-row ${
             mounted
-              ? 'opacity-100 translate-y-0'
-              : 'opacity-0 translate-y-8'
+              ? 'translate-y-0 opacity-100'
+              : 'translate-y-8 opacity-0'
           }`}
         >
           <a
             href="#contact"
-            className="px-8 py-3.5 bg-[#D4AF37] text-black font-semibold text-sm tracking-wide rounded-full hover:bg-[#F3E5AB] transition-all duration-300 hover:scale-105 shadow-lg shadow-[#D4AF37]/20"
+            className="rounded-full bg-[#D4AF37] px-8 py-3.5 text-sm font-semibold tracking-wide text-black shadow-lg shadow-[#D4AF37]/20 transition-all duration-300 hover:scale-105 hover:bg-[#F3E5AB]"
           >
             Réserver mon séjour
           </a>
 
           <a
             href="#a-propos"
-            className="px-8 py-3.5 border border-white/30 text-white font-semibold text-sm tracking-wide rounded-full hover:bg-white/10 hover:border-white/50 transition-all duration-300 hover:scale-105"
+            className="rounded-full border border-white/30 px-8 py-3.5 text-sm font-semibold tracking-wide text-white transition-all duration-300 hover:scale-105 hover:border-white/50 hover:bg-white/10"
           >
             Découvrir l&apos;hôtel
           </a>
@@ -244,31 +234,18 @@ export default function Hero() {
 
       {/* INDICATEUR DE SCROLL */}
       <div
-        className={`absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 transition-opacity duration-1000 delay-[1500ms] ${
+        className={`absolute bottom-8 left-1/2 flex -translate-x-1/2 flex-col items-center gap-2 transition-opacity duration-1000 delay-[1500ms] ${
           mounted ? 'opacity-100' : 'opacity-0'
         }`}
       >
-        <span className="text-white/50 text-[10px] tracking-[0.25em] uppercase">
+        <span className="text-[10px] uppercase tracking-[0.25em] text-white/50">
           Découvrir
         </span>
 
-        <ChevronDown className="w-4 h-4 text-[#D4AF37] animate-bounce" />
+        <ChevronDown className="h-4 w-4 animate-bounce text-[#D4AF37]" />
       </div>
 
-      {/* ANIMATION DU TEXTE DU HAUT */}
-      <style jsx global>{`
-        @keyframes welcome {
-          0% {
-            opacity: 0;
-            transform: translateY(18px);
-          }
-
-          100% {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-      `}</style>
+     
     </section>
   );
 }

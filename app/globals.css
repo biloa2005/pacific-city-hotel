@@ -58,3 +58,16 @@ body {
           background: #D4AF37;
           width: 24px;
         }
+        /* animation hero accueil */
+         {/* ANIMATION DU TEXTE DYNAMIQUE */}
+        @keyframes welcome {
+          0% {
+            opacity: 0;
+            transform: translateY(18px);
+          }
+
+          100% {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }

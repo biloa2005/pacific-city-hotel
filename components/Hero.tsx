@@ -55,7 +55,7 @@ export default function Hero() {
   // Animation du titre lettre par lettre
   useEffect(() => {
     const current = heroTitles[currentTitle];
-    let timeout;
+    let timeout: NodeJS.Timeout | undefined;
 
     // ÉCRITURE DE LA PREMIÈRE LIGNE
     if (phase === 'typing-line1') {
@@ -115,7 +115,11 @@ export default function Hero() {
       }
     }
 
-    return () => clearTimeout(timeout);
+    return () => {
+      if (timeout) {
+        clearTimeout(timeout);
+      }
+    };
   }, [
     phase,
     displayedLine1,

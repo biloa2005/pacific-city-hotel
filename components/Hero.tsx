@@ -33,9 +33,15 @@ export default function Hero() {
   ];
 
   const [currentText, setCurrentText] = useState(0);
-  const [currentTitle, setCurrentTitle] = useState(0);
 
-  // Déclenchement des animations d'apparition progressive à l'ouverture
+  // État du titre animé
+  const [currentTitle, setCurrentTitle] = useState(0);
+  const [displayedLine1, setDisplayedLine1] = useState('');
+  const [displayedLine2, setDisplayedLine2] = useState('');
+  const [isDeleting, setIsDeleting] = useState(false);
+  const [isTyping, setIsTyping] = useState(true);
+
+  // Déclenchement des animations
   useEffect(() => {
     setMounted(true);
   }, []);
@@ -49,17 +55,94 @@ export default function Hero() {
     return () => clearInterval(interval);
   }, [welcomeTexts.length]);
 
-  // Changement automatique du titre principal
+  // Animation du titre lettre par lettre
   useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentTitle((prev) => (prev + 1) % heroTitles.length);
-    }, 5000);
+    const current = heroTitles[currentTitle];
 
-    return () => clearInterval(interval);
-  }, [heroTitles.length]);
+    let timeout;
+
+    // ==========================
+    // PHASE 1 : ÉCRITURE
+    // ==========================
+    if (isTyping && !isDeleting) {
+      const fullText1 = current.line1;
+      const fullText2 = current.line2;
+
+      // Écrire la première ligne
+      if (displayedLine1.length < fullText1.length) {
+        timeout = setTimeout(() => {
+          setDisplayedLine1(
+            fullText1.slice(0, displayedLine1.length + 1)
+          );
+        }, 55);
+      }
+
+      // Une fois ligne 1 terminée, écrire ligne 2
+      else if (displayedLine2.length < fullText2.length) {
+        timeout = setTimeout(() => {
+          setDisplayedLine2(
+            fullText2.slice(0, displayedLine2.length + 1)
+          );
+        }, 55);
+      }
+
+      // Texte entièrement écrit
+      else {
+        timeout = setTimeout(() => {
+          setIsTyping(false);
+          setIsDeleting(true);
+        }, 3700);
+      }
+    }
+
+    // ==========================
+    // PHASE 2 : EFFACEMENT
+    // ==========================
+    else if (isDeleting) {
+      // Effacer d'abord la deuxième ligne
+      if (displayedLine2.length > 0) {
+        timeout = setTimeout(() => {
+          setDisplayedLine2(
+            displayedLine2.slice(0, -1)
+          );
+        }, 30);
+      }
+
+      // Ensuite effacer la première ligne
+      else if (displayedLine1.length > 0) {
+        timeout = setTimeout(() => {
+          setDisplayedLine1(
+            displayedLine1.slice(0, -1)
+          );
+        }, 30);
+      }
+
+      // Quand tout est effacé
+      else {
+        timeout = setTimeout(() => {
+          setCurrentTitle(
+            (prev) => (prev + 1) % heroTitles.length
+          );
+
+          setIsDeleting(false);
+          setIsTyping(true);
+        }, 400);
+      }
+    }
+
+    return () => clearTimeout(timeout);
+  }, [
+    displayedLine1,
+    displayedLine2,
+    currentTitle,
+    isDeleting,
+    isTyping,
+    heroTitles,
+  ]);
 
   return (
     <section className="relative min-h-screen w-full overflow-hidden bg-black">
+
       {/* IMAGE DE FOND */}
       <div
         className="absolute inset-0 bg-cover bg-center scale-105"
@@ -68,14 +151,14 @@ export default function Hero() {
         }}
       />
 
-      {/* VOILES POUR LA LISIBILITÉ DU TEXTE */}
+      {/* VOILES */}
       <div className="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-black/30" />
       <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-transparent to-black/40" />
 
       {/* CONTENU */}
       <div className="relative z-10 flex min-h-screen flex-col items-center justify-center px-6 text-center">
-        
-        {/* BLOC 1 : ÉTOILES + TEXTE DYNAMIQUE (Apparaît en 1er) */}
+
+        {/* ÉTOILES + TEXTE */}
         <div
           className={`mb-6 flex flex-col sm:flex-row items-center gap-2 transition-all duration-1000 delay-100 ease-out ${
             mounted
@@ -104,7 +187,7 @@ export default function Hero() {
           </div>
         </div>
 
-        {/* BLOC 2 : TITRE PRINCIPAL (Apparaît en 2ème) */}
+        {/* TITRE PRINCIPAL AVEC EFFET MACHINE À ÉCRIRE */}
         <h1
           className={`font-serif font-bold leading-[1.05] text-white transition-all duration-1000 delay-500 ease-out ${
             mounted
@@ -112,15 +195,17 @@ export default function Hero() {
               : 'opacity-0 translate-y-8'
           }`}
         >
-          <span className="block text-4xl sm:text-6xl lg:text-7xl">
-            {heroTitles[currentTitle].line1}
+          <span className="block text-4xl sm:text-6xl lg:text-7xl min-h-[1.2em]">
+            {displayedLine1}
+            <span className="inline-block w-[2px] h-[0.8em] bg-[#D4AF37] ml-1 animate-pulse" />
           </span>
-          <span className="block text-4xl sm:text-6xl lg:text-7xl mt-1 sm:mt-2 bg-gradient-to-r from-[#D4AF37] via-[#F3E5AB] to-[#AA7C11] bg-clip-text text-transparent">
-            {heroTitles[currentTitle].line2}
+
+          <span className="block text-4xl sm:text-6xl lg:text-7xl mt-1 sm:mt-2 min-h-[1.2em] bg-gradient-to-r from-[#D4AF37] via-[#F3E5AB] to-[#AA7C11] bg-clip-text text-transparent">
+            {displayedLine2}
           </span>
         </h1>
 
-        {/* BLOC 3 : PARAGRAPHE DE DESCRIPTION (Apparaît en 3ème) */}
+        {/* PARAGRAPHE */}
         <p
           className={`mt-6 max-w-xl text-base sm:text-lg text-white/80 leading-relaxed transition-all duration-1000 delay-[900ms] ease-out ${
             mounted
@@ -133,7 +218,7 @@ export default function Hero() {
           comme chez vous — en mieux.
         </p>
 
-        {/* BLOC 4 : BOUTONS D'ACTION (Apparaissent en 4ème) */}
+        {/* BOUTONS */}
         <div
           className={`mt-10 flex flex-col sm:flex-row items-center gap-4 transition-all duration-1000 delay-[1200ms] ease-out ${
             mounted
@@ -157,7 +242,7 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* INDICATEUR DE SCROLL (Apparaît en dernier) */}
+      {/* INDICATEUR DE SCROLL */}
       <div
         className={`absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 transition-opacity duration-1000 delay-[1500ms] ${
           mounted ? 'opacity-100' : 'opacity-0'
@@ -166,16 +251,18 @@ export default function Hero() {
         <span className="text-white/50 text-[10px] tracking-[0.25em] uppercase">
           Découvrir
         </span>
+
         <ChevronDown className="w-4 h-4 text-[#D4AF37] animate-bounce" />
       </div>
 
-      {/* ANIMATION DU TEXTE DYNAMIQUE */}
+      {/* ANIMATION DU TEXTE DU HAUT */}
       <style jsx global>{`
         @keyframes welcome {
           0% {
             opacity: 0;
             transform: translateY(18px);
           }
+
           100% {
             opacity: 1;
             transform: translateY(0);

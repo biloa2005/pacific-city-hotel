@@ -11,6 +11,7 @@ import {
   Phone,
   Star,
   Wifi,
+  Accessibility,
 } from 'lucide-react';
 
 interface Service {
@@ -44,6 +45,11 @@ const services: Service[] = [
     id: '5',
     title: 'Restauration',
     icon: <UtensilsCrossed className="w-6 h-6" />,
+  },
+   {
+    id: '6',
+    title: 'Acces adapté',
+    icon: <Accessibility className="w-6 h-6" />,
   },
   
 ];
@@ -155,7 +161,7 @@ export default function ServicesSection() {
                 style={{
                   transitionDelay: `${300 + index * 120}ms`,
                 }}
-                className={`group relative flex items-center gap-4 overflow-hidden border border-gray-100 bg-white p-4 shadow-sm transition-all duration-700 ease-out hover:-translate-y-1 hover:border-[#D4AF37]/30 hover:shadow-lg md:p-5 ${
+                className={`group relative flex flex-col items-center gap-4 overflow-hidden border border-gray-100 bg-white p-4 shadow-sm transition-all duration-700 ease-out hover:-translate-y-1 hover:border-[#D4AF37]/30 hover:shadow-lg md:p-5 ${
                   isVisible
                     ? 'translate-x-0 opacity-100'
                     : fromLeft

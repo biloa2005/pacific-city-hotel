@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { ChevronDown, Star } from 'lucide-react';
+import Link from 'next/link';
 
 const welcomeTexts = [
   'Bienvenue au Pacific City Hotel',
@@ -201,7 +202,7 @@ export default function Hero() {
 
         {/* DESCRIPTION */}
         <p
-          className={`mt-6 max-w-xl text-base leading-relaxed text-white/80 transition-all duration-1000 delay-[900ms] ease-out sm:text-lg ${
+          className={`mt-3 max-w-xl text-base leading-relaxed text-white/80 transition-all duration-1000 delay-[900ms] ease-out sm:text-lg ${
             mounted
               ? 'translate-y-0 opacity-100'
               : 'translate-y-8 opacity-0'
@@ -220,19 +221,19 @@ export default function Hero() {
               : 'translate-y-8 opacity-0'
           }`}
         >
-          <a
-            href="#contact"
-            className="rounded-full bg-[#D4AF37] px-8 py-3.5 text-sm font-semibold tracking-wide text-black shadow-lg shadow-[#D4AF37]/20 transition-all duration-300 hover:scale-105 hover:bg-[#F3E5AB]"
+          <Link
+            href="contact"
+            className=" bg-[#D4AF37] px-8 py-3.5 text-sm font-semibold tracking-wide text-black shadow-lg shadow-[#D4AF37]/20 transition-all duration-300 hover:scale-105 hover:bg-[#F3E5AB]"
           >
             Réserver mon séjour
-          </a>
+          </Link>
 
-          <a
+          <Link
             href="#a-propos"
-            className="rounded-full border border-white/30 px-8 py-3.5 text-sm font-semibold tracking-wide text-white transition-all duration-300 hover:scale-105 hover:border-white/50 hover:bg-white/10"
+            className="border border-white/30 px-8 py-3.5 text-sm font-semibold tracking-wide text-white transition-all duration-300 hover:scale-105 hover:border-white/50 hover:bg-white/10"
           >
             Découvrir l&apos;hôtel
-          </a>
+          </Link>
         </div>
       </div>
 

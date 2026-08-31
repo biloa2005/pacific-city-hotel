@@ -36,7 +36,7 @@ const CONTACT_INFO = [
   {
     icon: Phone,
     label: 'Téléphone',
-    value: '+237 651 052 543',
+    value: '+237 651 052 543 /699 98 82 82',
     href: 'tel:+237651052543', // Format tel: pour les liens mobiles
   },
   {

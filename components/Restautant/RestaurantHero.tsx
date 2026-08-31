@@ -21,12 +21,7 @@ export default function RestaurantHero() {
       {/* Texte superposé */}
       <div className="absolute bottom-8 left-0 right-0 px-6 sm:px-8 lg:px-12">
         <div className="max-w-7xl mx-auto">
-          {/* Étoiles décoratives */}
-          <div className="flex gap-1 mb-2">
-            {[...Array(5)].map((_, i) => (
-              <Star key={i} className="w-3.5 h-3.5 fill-[#D4AF37] text-[#D4AF37]" />
-            ))}
-          </div>
+        
           
           <h2 className="text-xl sm:text-2xl lg:text-3xl xl:text-4xl font-bold text-white drop-shadow-lg tracking-wide">
             Pacific Hotel

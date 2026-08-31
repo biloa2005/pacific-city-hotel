@@ -58,12 +58,7 @@ export default function RoomSlide() {
                   {/* Ligne décorative dorée */}
                   <div className="w-16 h-0.5 bg-[#D4AF37] mx-auto mb-5" />
                   
-                  {/* Étoile décorative */}
-                  <div className="flex justify-center gap-1 mb-4">
-                    {[...Array(5)].map((_, i) => (
-                      <Star key={i} className="w-4 h-4 fill-[#D4AF37] text-[#D4AF37]" />
-                    ))}
-                  </div>
+                
                   
                   <h2 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-white mb-4 drop-shadow-lg tracking-wider">
                     {image.title}
@@ -82,7 +77,7 @@ export default function RoomSlide() {
                       "{testimonials[index % testimonials.length].text}"
                     </p>
                     <p className="text-[#D4AF37] text-xs font-medium tracking-wider">
-                      — {testimonials[index % testimonials.length].author}
+                       {testimonials[index % testimonials.length].author}
                     </p>
                   </div>
 
@@ -93,11 +88,7 @@ export default function RoomSlide() {
               {/* Version mobile - message simplifié en bas */}
               <div className="absolute bottom-8 left-0 right-0 px-6 lg:hidden">
                 <div className="text-center">
-                  <div className="flex justify-center gap-1 mb-2">
-                    {[...Array(5)].map((_, i) => (
-                      <Star key={i} className="w-3 h-3 fill-[#D4AF37] text-[#D4AF37]" />
-                    ))}
-                  </div>
+                 
                   <h3 className="text-white text-lg font-bold drop-shadow-lg">{image.title}</h3>
                   <p className="text-white/80 text-sm drop-shadow-lg">{image.description}</p>
                 </div>

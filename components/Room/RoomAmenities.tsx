@@ -116,7 +116,7 @@ export default function RoomAmenities() {
                 {/* Changement : w-10 h-10 -> w-8 h-8 (sur mobile) */}
                 <div className="w-15 h-20 sm:w-10 sm:h-10 rounded-lg bg-[#D4AF37]/10 flex items-center justify-center shrink-0 group-hover:bg-[#D4AF37] transition-colors duration-300">
                   {/* Changement : w-5 h-5 -> w-4 h-4 (sur mobile) */}
-                  <IconComponent className="w-10 h-15 sm:w-5 sm:h-5 text-[#D4AF37] group-hover:text-white transition-colors duration-300" />
+                  <IconComponent className="w-10 h-15 lg:w-20 lg:h-15 sm:w-5 sm:h-5 text-[#D4AF37] group-hover:text-white transition-colors duration-300" />
                 </div>
 
                 {/* Nom de l'équipement */}

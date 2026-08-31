@@ -49,12 +49,7 @@ export default function Slide() {
               {/* Texte "Pacific City Hotel" en bas */}
               <div className="absolute bottom-8 left-0 right-0 px-6 sm:px-8 lg:px-12">
                 <div className="max-w-7xl mx-auto">
-                  {/* Étoiles décoratives */}
-                  <div className="flex gap-1 mb-3">
-                    {[...Array(5)].map((_, i) => (
-                      <Star key={i} className="w-4 h-4 fill-[#D4AF37] text-[#D4AF37]" />
-                    ))}
-                  </div>
+                 
                   
                   <h2 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-bold text-white drop-shadow-lg tracking-wide">
                     Pacific City Hotel

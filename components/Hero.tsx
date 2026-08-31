@@ -161,14 +161,7 @@ export default function Hero() {
               : 'translate-y-6 opacity-0'
           }`}
         >
-          <div className="flex gap-1">
-            {[...Array(5)].map((_, i) => (
-              <Star
-                key={i}
-                className="h-4 w-4 fill-[#D4AF37] text-[#D4AF37]"
-              />
-            ))}
-          </div>
+         
 
           <div className="relative flex h-6 items-center justify-center overflow-hidden">
             <span
@@ -210,7 +203,7 @@ export default function Hero() {
         >
           Chambres raffinées, gastronomie locale sublimée et service
           attentionné, au cœur d&apos;Obala. Le Pacific City Hotel vous accueille
-          comme chez vous — en mieux.
+          comme chez vous.
         </p>
 
         {/* BOUTON*/}

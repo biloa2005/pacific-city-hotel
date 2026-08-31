@@ -81,6 +81,16 @@ const ACTIVITIES: Activity[] = [
     icon: MapPin,
     distance: 'Obala',
   },
+   {
+    id: '6',
+    name: 'Pimenterie (grillades)',
+    tag: 'Patrimoine Gastronomique',
+    description:"Découvrez l'authenticité d'Obala à travers nos viandes sélectionnées, saisies à la perfection sur nos braises ardentes.",
+      
+    image: '/decouverte/grillade.webp',
+    icon: MapPin,
+    distance: 'Obala',
+  },
 ];
 
 export default function Entertainment() {
@@ -211,60 +221,60 @@ export default function Entertainment() {
               const Icon = activity.icon;
               
               return (
-                <SwiperSlide key={activity.id}>
-                  <div className="relative h-[400px] sm:h-[500px] lg:h-[600px] xl:h-[650px]">
-                    {/* Image de fond */}
-                    <Image
-                      src={activity.image}
-                      alt={activity.name}
-                      fill
-                      sizes="100vw"
-                      className="object-cover"
-                      priority
-                    />
+               <SwiperSlide key={activity.id}>
+  {/* Hauteur réduite sur tous les écrans */}
+  <div className="relative h-[280px] sm:h-[380px] lg:h-[450px] xl:h-[480px]">
+    {/* Image de fond */}
+    <Image
+      src={activity.image}
+      alt={activity.name}
+      fill
+      sizes="80vw"
+      className="object-cover"
+      priority
+    />
 
-                    {/* Overlay gradient - plus subtil */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-stone-950/80 via-stone-950/20 to-transparent" />
-                    
-                    {/* Overlay latéral pour un effet plus sophistiqué */}
-                    <div className="absolute inset-0 bg-gradient-to-r from-stone-950/10 to-transparent" />
+    {/* Overlay gradient - plus subtil */}
+    <div className="absolute inset-0 bg-gradient-to-t from-stone-950/80 via-stone-950/20 to-transparent" />
+    
+    {/* Overlay latéral pour un effet plus sophistiqué */}
+    <div className="absolute inset-0 bg-gradient-to-r from-stone-950/10 to-transparent" />
 
-                    {/* Contenu du slide - aligné à gauche */}
-                    <div className="absolute inset-0 flex items-end lg:items-center z-10 ">
-                      <div className="w-full px-6 sm:px-10 lg:px-16 xl:px-20 pb-10 sm:pb-16 lg:pb-20 ">
-                        <div className="max-w-2xl">
-                          {/* Tag avec animation d'entrée  */}
-                          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white/90 text-[10px] sm:text-xs uppercase tracking-[0.2em] font-light mb--2 sm:mb-7 ">
-                            <Icon className="w-3.5 h-3.5 text-[#D4AF37]" />
-                            {activity.tag}
-                          </div>
+    {/* Contenu du slide - aligné à gauche */}
+    <div className="absolute inset-0 flex items-end lg:items-center z-10">
+      {/* Padding réduit pour les petits écrans */}
+      <div className="w-full px-4 sm:px-8 lg:px-14 xl:px-16 pb-6 sm:pb-12 lg:pb-16">
+        <div className="max-w-2xl">
+          {/* Tag - plus petit sur mobile */}
+          <div className="inline-flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-4 py-1 sm:py-2 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white/90 text-[8px] sm:text-xs uppercase tracking-[0.2em] font-light mb-2 sm:mb-4">
+            <Icon className="w-2.5 h-2.5 sm:w-3.5 sm:h-3.5 text-[#D4AF37]" />
+            {activity.tag}
+          </div>
 
-                          {/* Titre */}
-                          <h3 className="font-serif text-3xl sm:text-4xl lg:text-5xl xl:text-6xl text-white font-light tracking-wide leading-[1.1] mb-3 sm:mb-5">
-                            {activity.name}
-                          </h3>
+          {/* Titre - plus petit sur mobile */}
+          <h3 className="font-serif text-2xl sm:text-3xl lg:text-4xl xl:text-5xl text-white font-light tracking-wide leading-[1.1] mb-2 sm:mb-4">
+            {activity.name}
+          </h3>
 
-                          {/* Description */}
-                          <p className="text-white/80 text-sm sm:text-base lg:text-lg font-light leading-relaxed max-w-xl mb-5 sm:mb-7 line-clamp-2 sm:line-clamp-3">
-                            {activity.description}
-                          </p>
+          {/* Description - masquée sur très petit écran */}
+          <p className="hidden sm:block text-white/80 text-sm sm:text-base lg:text-lg font-light leading-relaxed max-w-xl mb-4 sm:mb-6 line-clamp-2 sm:line-clamp-3">
+            {activity.description}
+          </p>
 
-                          {/* Distance et lien */}
-                          <div className="flex flex-wrap items-center gap-4">
-                            {activity.distance && (
-                              <div className="inline-flex items-center gap-2 text-white/60 text-[10px] sm:text-xs uppercase tracking-widest font-light">
-                                <MapPin className="w-3.5 h-3.5" />
-                                {activity.distance}
-                              </div>
-                            )}
-                            
-                           
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </SwiperSlide>
+          {/* Distance et lien */}
+          <div className="flex flex-wrap items-center gap-3 sm:gap-4">
+            {activity.distance && (
+              <div className="inline-flex items-center gap-1.5 sm:gap-2 text-white/60 text-[8px] sm:text-xs uppercase tracking-widest font-light">
+                <MapPin className="w-2.5 h-2.5 sm:w-3.5 sm:h-3.5" />
+                {activity.distance}
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</SwiperSlide>
               );
             })}
           </Swiper>

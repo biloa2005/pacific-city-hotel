@@ -44,21 +44,32 @@ export default function Navbar() {
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-[70px] sm:h-[88px] lg:h-[104px] relative">
         
-        {/* LOGO */}
+        {/* LOGO AVEC TEXTE EN DESSOUS */}
         <Link 
           href="#" 
-          className="flex items-center shrink-0 hover:opacity-90 transition-opacity"
+          className="flex flex-col items-center shrink-0 hover:opacity-90 transition-opacity"
           onClick={closeMenu}
         >
           <Image
             src="/logo.png"
             alt="Pacific City Hotel"
-            width={400}
-            height={400}
+            width={500}
+            height={500}
             priority
-            className="h-[50px] sm:h-[70px] lg:h-[88px] w-auto object-contain"
+            className="h-[40px] sm:h-[55px] lg:h-[70px] w-auto object-contain"
           />
+          {/* Texte "Pacific City" en doré en dessous du logo */}
+          <span 
+            className={`text-[10px] sm:text-xs lg:text-sm font-serif tracking-[0.3em] uppercase transition-colors duration-300 ${
+              isScrolled 
+                ? 'text-[#D4AF37]' 
+                : 'text-[#D4AF37]'
+            }`}
+          >
+            Pacific City
+          </span>
         </Link>
+       
 
         {/* NAVIGATION DESKTOP (Au scroll uniquement) */}
         {isScrolled && (
@@ -128,14 +139,7 @@ export default function Navbar() {
                   {link.name}
                 </Link>
               ))}
-              <Link
-                href="/contact"
-                onClick={closeMenu}
-                className="px-4 py-3 text-sm font-medium text-[#D4AF37] hover:bg-[#D4AF37]/10 transition-colors flex items-center gap-2"
-              >
-                <PhoneCall className="w-4 h-4" />
-                Réserver
-              </Link>
+             
             </nav>
             
             <div className="p-3 border-t border-[#D4AF37]/20 bg-[#D4AF37]/5">

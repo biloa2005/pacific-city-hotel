@@ -23,7 +23,7 @@ interface EquipmentItem {
 }
 
 // Type pour les catégories de chambres
-type RoomCategory = 'suite' | 'standard' | 'simple';
+type RoomCategory = 'suite' | 'standard' | 'baignoire';
 
 // Données des équipements filtrés par catégorie
 const ROOM_EQUIPMENTS: Record<RoomCategory, EquipmentItem[]> = {
@@ -43,7 +43,7 @@ const ROOM_EQUIPMENTS: Record<RoomCategory, EquipmentItem[]> = {
    
 
   ],
-  simple: [
+  baignoire : [
        
     { id: '1', name: 'Salle de Bain Privative avec Baignoire', icon: Bath },
     { id: '2', name: '1 Lit Double', icon: Bed },
@@ -56,7 +56,7 @@ const ROOM_EQUIPMENTS: Record<RoomCategory, EquipmentItem[]> = {
 const FILTERS: { key: RoomCategory; label: string }[] = [
   { key: 'suite', label: 'Suites' },
   { key: 'standard', label: 'Chambres Standard' },
-  { key: 'simple', label: 'Chambres Simples' },
+  { key: 'baignoire', label: 'Chambres avec baignoire' },
 ];
 
 export default function RoomAmenities() {

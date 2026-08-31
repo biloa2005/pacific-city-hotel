@@ -257,7 +257,7 @@ export default function Entertainment() {
           </h3>
 
           {/* Description - masquée sur très petit écran */}
-          <p className="hidden sm:block text-white/80 text-sm sm:text-base lg:text-lg font-light leading-relaxed max-w-xl mb-4 sm:mb-6 line-clamp-2 sm:line-clamp-3">
+          <p className="sm:block text-white/80 text-sm sm:text-base lg:text-lg font-light leading-relaxed max-w-xl mb-4 sm:mb-6 line-clamp-2 sm:line-clamp-3">
             {activity.description}
           </p>
 

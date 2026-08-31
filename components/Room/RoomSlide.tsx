@@ -128,11 +128,7 @@ export default function RoomSlide() {
         </span>
       </div>
 
-      {/* Badge de confiance */}
-      <div className="absolute top-6 right-6 z-10 hidden lg:flex items-center gap-2 px-3 py-1.5 bg-black/40 backdrop-blur-sm rounded-full border border-[#D4AF37]/30">
-        <Award className="w-3.5 h-3.5 text-[#D4AF37]" />
-        <span className="text-white text-[10px] font-light tracking-wider">Hôtel 5 étoiles</span>
-      </div>
+    
     </section>
   );
 }

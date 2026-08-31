@@ -231,10 +231,10 @@ export default function Entertainment() {
 
                     {/* Contenu du slide - aligné à gauche */}
                     <div className="absolute inset-0 flex items-end lg:items-center z-10 ">
-                      <div className="w-full px-6 sm:px-10 lg:px-16 xl:px-20 pb-10 sm:pb-16 lg:pb-20 hidden lg:block ">
+                      <div className="w-full px-6 sm:px-10 lg:px-16 xl:px-20 pb-10 sm:pb-16 lg:pb-20 ">
                         <div className="max-w-2xl">
                           {/* Tag avec animation d'entrée  */}
-                          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white/90 text-[10px] sm:text-xs uppercase tracking-[0.2em] font-light mb-4 sm:mb-6">
+                          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white/90 text-[10px] sm:text-xs uppercase tracking-[0.2em] font-light mb--2 sm:mb-7 ">
                             <Icon className="w-3.5 h-3.5 text-[#D4AF37]" />
                             {activity.tag}
                           </div>

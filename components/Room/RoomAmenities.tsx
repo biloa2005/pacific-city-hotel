@@ -2,11 +2,8 @@
 
 import { useState } from 'react';
 import {
-  Wifi,
-  Tv,
-  Wind,
-  Coffee,
-  ShieldCheck,
+ 
+ 
   Bath,
   Wine,
   Sparkles,
@@ -15,6 +12,7 @@ import {
   CheckCircle2,
   Bed,
   BedDouble,
+  BadgeDollarSign,
 } from 'lucide-react';
 
 // Définition du type pour chaque équipement
@@ -30,24 +28,27 @@ type RoomCategory = 'suite' | 'standard' | 'simple';
 // Données des équipements filtrés par catégorie
 const ROOM_EQUIPMENTS: Record<RoomCategory, EquipmentItem[]> = {
   suite: [
-    { id: '1', name: 'Salle de Bain Privative avec Douche', icon: Bath },
+    { id: '1', name: 'Salle de Bain Privative avec Baignoire', icon: Bath },
     { id: '2', name: '1 Lit Double', icon: Bed },
      { id: '3', name: 'Service de chambre 24h/24', icon: UtensilsCrossed },
    { id: '4', name: 'Chambre + Salon privé', icon: BedDouble },
+   { id: '5', name: 'Prix: 20000 FCFA', icon: BadgeDollarSign },
   
     ],
   standard: [
     { id: '1', name: 'Salle de Bain Privative avec Douche', icon: Bath },
     { id: '2', name: '1 Lit Double', icon: Bed },
      { id: '3', name: 'Service de chambre 24h/24', icon: UtensilsCrossed },
+     { id: '4', name: 'Prix: 10000 FCFA', icon: BadgeDollarSign },
    
 
   ],
   simple: [
        
-    { id: '1', name: 'Salle d’Eau Privative', icon: Bath },
+    { id: '1', name: 'Salle de Bain Privative avec Baignoire', icon: Bath },
     { id: '2', name: '1 Lit Double', icon: Bed },
      { id: '3', name: 'Service de chambre 24h/24', icon: UtensilsCrossed },
+     { id: '4', name: 'Prix: 15000 FCFA', icon: BadgeDollarSign },
   ],
 };
 

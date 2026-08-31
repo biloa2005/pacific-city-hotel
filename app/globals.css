@@ -77,3 +77,117 @@ body {
             transform: translateY(0);
           }
         }
+      /* slide entertaiment */
+
+          /* Styles personnalisés pour Swiper - Inspiration Andou Anfa */
+          :global(.swiper-pagination-custom) {
+            display: flex;
+            gap: 8px;
+            justify-content: center;
+            position: absolute;
+            bottom: 24px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 20;
+          }
+
+          :global(.swiper-pagination-custom .custom-bullet) {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+            border: 1px solid transparent;
+          }
+
+          :global(.swiper-pagination-custom .custom-bullet.swiper-pagination-bullet-active) {
+            width: 28px;
+            border-radius: 4px;
+            background: #D4AF37;
+            border-color: #D4AF37;
+          }
+
+          :global(.swiper-pagination-custom .custom-bullet:hover) {
+            background: rgba(255, 255, 255, 0.6);
+          }
+
+          :global(.swiper-pagination-custom .custom-bullet.swiper-pagination-bullet-active:hover) {
+            background: #D4AF37;
+          }
+
+          /* Animation de fondu pour le texte */
+          :global(.swiper-slide) {
+            opacity: 0 !important;
+            transition: opacity 0.8s ease !important;
+          }
+
+          :global(.swiper-slide-active) {
+            opacity: 1 !important;
+          }
+
+          :global(.swiper-slide) .font-serif,
+          :global(.swiper-slide) p,
+          :global(.swiper-slide) .inline-flex {
+            transition: all 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+          }
+
+          :global(.swiper-slide:not(.swiper-slide-active)) .font-serif,
+          :global(.swiper-slide:not(.swiper-slide-active)) p,
+          :global(.swiper-slide:not(.swiper-slide-active)) .inline-flex {
+            opacity: 0;
+            transform: translateY(20px);
+          }
+
+          :global(.swiper-slide-active) .font-serif {
+            transition-delay: 0.2s;
+          }
+
+          :global(.swiper-slide-active) p {
+            transition-delay: 0.4s;
+          }
+
+          :global(.swiper-slide-active) .inline-flex {
+            transition-delay: 0.1s;
+          }
+
+          /* Effet de progression automatique - barre en bas */
+          :global(.swiper-slide-active)::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, #D4AF37, #D4AF37);
+            animation: progressBar 4s linear forwards;
+            z-index: 15;
+          }
+
+          @keyframes progressBar {
+            from {
+              width: 0%;
+            }
+            to {
+              width: 100%;
+            }
+          }
+
+          /* Responsive */
+          @media (max-width: 640px) {
+            :global(.swiper-pagination-custom) {
+              bottom: 16px;
+              gap: 6px;
+            }
+
+            :global(.swiper-pagination-custom .custom-bullet) {
+              width: 6px;
+              height: 6px;
+            }
+
+            :global(.swiper-pagination-custom .custom-bullet.swiper-pagination-bullet-active) {
+              width: 20px;
+            }
+          }
+
+

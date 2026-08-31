@@ -23,7 +23,7 @@ export default function Home() {
      {/* <Gallery/>
      <Contact/> */}
      <ServicesSection/>
-      {/* <Entertainment/>  */}
+       <Entertainment/>  
      <Footer/>
           
    </div>

@@ -55,7 +55,7 @@ export default function RoomSlide() {
                 <div className="max-w-7xl mx-auto">
                 
                   
-                  <h2 className="text-xl sm:text-2xl lg:text-3xl xl:text-4xl font-bold text-white drop-shadow-lg tracking-wide">
+                  <h2 className="font-serif text-xl sm:text-2xl lg:text-3xl xl:text-4xl font-bold text-white drop-shadow-lg tracking-wide">
                     Pacific City Hotel
                   </h2>
                   

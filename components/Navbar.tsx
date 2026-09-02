@@ -134,7 +134,7 @@ export default function Navbar() {
                   key={link.name}
                   href={link.href}
                   onClick={closeMenu}
-                  className="px-4 py-3 text-sm font-medium text-gray-800 hover:bg-[#D4AF37]/10 hover:text-[#D4AF37] transition-colors"
+                  className="px-4 py-3 text-sm font-medium hover:bg-[#D4AF37]/10 hover:text-[#D4AF37] transition-colors"
                 >
                   {link.name}
                 </Link>

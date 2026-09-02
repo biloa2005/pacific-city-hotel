@@ -3,7 +3,7 @@ export default function PacificDescription() {
     <section className="py-12 px-6 max-w-4xl mx-auto text-center">
       {/* Taille augmentée : text-4xl sur mobile, text-6xl sur tablette, text-7xl sur ordinateur */}
       <h1 className="text-4xl md:text-6xl lg:text-7xl font-extrabold tracking-tight mb-8">
-        <span className="text-[#D4AF37]">
+        <span className="font-serif text-[#D4AF37]">
           Pacific City Hotel
         </span>
       </h1>

@@ -76,7 +76,7 @@ export default function About() {
           </span>
 
           <h2
-            className={`font- font-bold text-3xl sm:text-4xl lg:text-5xl text-gray-900 leading-tight mb-6 transition-all duration-700 delay-100 ease-out ${
+            className={`font-poppins font-bold text-3xl sm:text-4xl lg:text-5xl text-gray-900 leading-tight mb-6 transition-all duration-700 delay-100 ease-out ${
               isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
             }`}
           >

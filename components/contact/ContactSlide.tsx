@@ -51,7 +51,7 @@ export default function Slide() {
                 <div className="max-w-7xl mx-auto">
                  
                   
-                  <h2 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-bold text-white drop-shadow-lg tracking-wide">
+                  <h2 className="font-serif text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-bold text-white drop-shadow-lg tracking-wide">
                     Pacific City Hotel
                   </h2>
                   

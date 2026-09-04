@@ -75,7 +75,7 @@ export default function Footer() {
                   className="flex items-start gap-2.5 text-sm text-white/50 hover:text-[#D4AF37] transition-colors"
                 >
                   <Phone className="w-4 h-4 mt-0.5 shrink-0" />
-                  +237 651052543
+                  +237 651052543 / 655714864
                 </a>
               </li>
               <li>

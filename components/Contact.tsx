@@ -36,7 +36,7 @@ const CONTACT_INFO = [
   {
     icon: Phone,
     label: 'Téléphone',
-    value: '+237 651 052 543 /699 98 82 82',
+    value: '+237 651 052 543 / 655 71 48 64',
     href: 'tel:+237651052543', // Format tel: pour les liens mobiles
   },
   {
@@ -121,7 +121,7 @@ export default function ContactClair() {
             }`}
           >
             Pacific{' '}
-            <span className="bg-gradient-to-r from-[#D4AF37] via-[#F3E5AB] to-[#AA7C11] bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-[#D4AF37] to-[#AA7C11] bg-clip-text text-transparent">
               City Hotel
             </span>
           </h2>

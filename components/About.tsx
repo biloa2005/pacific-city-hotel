@@ -76,7 +76,7 @@ export default function About() {
           </span>
 
           <h2
-            className={`font-poppins font-bold text-3xl sm:text-4xl lg:text-5xl text-gray-900 leading-tight mb-6 transition-all duration-700 delay-100 ease-out ${
+            className={`font-serif font-bold text-3xl sm:text-4xl lg:text-5xl text-gray-900 leading-tight mb-6 transition-all duration-700 delay-100 ease-out ${
               isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
             }`}
           >
@@ -91,7 +91,7 @@ export default function About() {
               isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
             }`}
           >
-            Depuis plus de 15 ans, le Pacific city Hotel accueille voyageurs, touristes
+            Depuis plus de 2 ans, le Pacific city Hotel accueille voyageurs, touristes
             d&apos;affaires et familles au cœur d&apos;Obala. Chaque chambre,
             chaque plat, chaque échange avec notre équipe est pensé pour vous
             faire sentir attendu, et non simplement logé.

@@ -239,8 +239,10 @@ export default function Hero() {
         <span className="text-[10px] uppercase tracking-[0.25em] text-white/50">
           Découvrir
         </span>
+         <div className='ml-8'>
+                  <ChevronDown className="vh-4 w-4 animate-bounce text-[#D4AF37]" />
+      </div>
 
-        <ChevronDown className=" vh-4 w-4 animate-bounce text-[#D4AF37]" />
       </div>
 
      

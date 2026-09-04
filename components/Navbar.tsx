@@ -92,25 +92,31 @@ export default function Navbar() {
         )}
 
         {/* BOUTON MENU REDESIGNÉ - RECTANGLE AVEC "MENU" */}
-        <button
-          type="button"
-          onClick={toggleMenu}
-          className="lg:hidden relative z-50 flex items-center gap-2 px-4 py-2.5 border-2 border-[#D4AF37] bg-transparent text-[#D4AF37] font-medium text-sm tracking-wider uppercase transition-all duration-300 hover:bg-[#D4AF37] hover:text-white hover:shadow-lg hover:shadow-[#D4AF37]/30 active:scale-95"
-          aria-label={isOpen ? "Fermer le menu" : "Ouvrir le menu"}
-          aria-expanded={isOpen}
-        >
-          {isOpen ? (
-            <>
-              <X className="w-5 h-5" />
-              <span>Fermer</span>
-            </>
-          ) : (
-            <>
-              <Menu className="w-5 h-5" />
-              <span>Menu</span>
-            </>
-          )}
-        </button>
+       <button
+  type="button"
+  onClick={toggleMenu}
+  className="lg:hidden relative z-50 flex flex-col justify-between w-8 h-6 bg-transparent border-none cursor-pointer group focus:outline-none"
+  aria-label={isOpen ? "Fermer le menu" : "Ouvrir le menu"}
+  aria-expanded={isOpen}
+>
+  {/* Barre Supérieure */}
+  <span
+    className={`h-[3px] bg-[#D4AF37] transition-all duration-300 ease-in-out origin-left
+      ${isOpen ? "w-8 rotate-45 translate-x-[3px] -translate-y-[1px]" : "w-8"}`}
+  />
+
+  {/* Barre Centrale (Plus courte) */}
+  <span
+    className={`h-[3px] bg-[#D4AF37] transition-all duration-300 ease-in-out
+      ${isOpen ? "w-0 opacity-0" : "w-6 self-end group-hover:w-8"}`}
+  />
+
+  {/* Barre Inférieure (Moyenne) */}
+  <span
+    className={`h-[3px] bg-[#D4AF37] transition-all duration-300 ease-in-out origin-left
+      ${isOpen ? "w-8 -rotate-45 translate-x-[3px] translate-y-[2px]" : "w-7"}`}
+  />
+</button>
 
         {/* BOUTON RÉSERVER - Visible sur grand écran */}
         <Link

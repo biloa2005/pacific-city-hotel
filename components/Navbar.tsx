@@ -91,8 +91,8 @@ export default function Navbar() {
           </ul>
         )}
 
-        {/* BOUTON MENU REDESIGNÉ - RECTANGLE AVEC "MENU" */}
-       <button
+        {/* BOUTON MENU REDESIGNÉ - */}
+      <button
   type="button"
   onClick={toggleMenu}
   className="lg:hidden relative z-50 flex flex-col justify-between w-8 h-6 bg-transparent border-none cursor-pointer group focus:outline-none"
@@ -101,20 +101,20 @@ export default function Navbar() {
 >
   {/* Barre Supérieure */}
   <span
-    className={`h-[3px] bg-[#D4AF37] transition-all duration-300 ease-in-out origin-left
-      ${isOpen ? "w-8 rotate-45 translate-x-[3px] -translate-y-[1px]" : "w-8"}`}
+    className={`w-8 h-[3px] bg-[#D4AF37] transition-all duration-300 ease-in-out origin-center
+      ${isOpen ? "rotate-45 translate-y-[10.5px]" : ""}`}
   />
 
-  {/* Barre Centrale (Plus courte) */}
+  {/* Barre Centrale */}
   <span
-    className={`h-[3px] bg-[#D4AF37] transition-all duration-300 ease-in-out
-      ${isOpen ? "w-0 opacity-0" : "w-6 self-end group-hover:w-8"}`}
+    className={`w-8 h-[3px] bg-[#D4AF37] transition-all duration-300 ease-in-out
+      ${isOpen ? "opacity-0 scale-x-0" : ""}`}
   />
 
-  {/* Barre Inférieure (Moyenne) */}
+  {/* Barre Inférieure */}
   <span
-    className={`h-[3px] bg-[#D4AF37] transition-all duration-300 ease-in-out origin-left
-      ${isOpen ? "w-8 -rotate-45 translate-x-[3px] translate-y-[2px]" : "w-7"}`}
+    className={`w-8 h-[3px] bg-[#D4AF37] transition-all duration-300 ease-in-out origin-center
+      ${isOpen ? "-rotate-45 -translate-y-[10.5px]" : ""}`}
   />
 </button>
 

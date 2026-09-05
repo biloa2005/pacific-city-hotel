@@ -48,7 +48,7 @@ const services: Service[] = [
   },
    {
     id: '6',
-    title: 'Acces adapté',
+    title: 'Accès adapté',
     icon: <Accessibility className="w-6 h-6" />,
   },
   

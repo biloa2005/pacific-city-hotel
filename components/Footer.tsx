@@ -95,7 +95,7 @@ export default function Footer() {
           </div>
 
           {/* RÉSERVATION RAPIDE */}
-          <div>
+          <div className='hidden lg:block'>
             <h4 className="text-white text-sm font-semibold uppercase tracking-wider mb-5">
               Réservez votre séjour
             </h4>
@@ -103,12 +103,12 @@ export default function Footer() {
               Notre équipe est disponible 24h/24 pour organiser votre arrivée.
             </p>
 
-            <a href="#contact"
+            <Link href="contact"
               className="inline-flex items-center gap-1.5 px-5 py-2.5 bg-[#D4AF37] text-black text-sm font-semibold rounded-full hover:bg-[#F3E5AB] transition-colors"
             >
               Nous contacter
               <ArrowUpRight className="w-4 h-4" />
-            </a>
+            </Link>
           </div>
         </div>
 
@@ -116,7 +116,7 @@ export default function Footer() {
         <div className="h-px w-full bg-gradient-to-r from-transparent via-white/10 to-transparent" />
 
         {/* BAS DE FOOTER */}
-        <div className="pt-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-center sm:text-left">
+        <div className="pt-3 flex flex-col sm:flex-row items-center justify-between gap-3 text-center sm:text-left">
           <p className="text-xs text-white/40">
             © {currentYear} Pacific Hotel — Obala, Cameroun. Tous droits réservés.
           </p>

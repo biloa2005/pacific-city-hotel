@@ -21,6 +21,9 @@ export const metadata: Metadata = {
     default: "Pacific Hotel | Hôtel à Obala, Cameroun",
     template: "%s | Pacific Hotel",
   },
+  icons:{
+    icon:"s.webp"
+  },
 
   description:
     "Découvrez Pacific Hotel à Obala, près de Yaoundé. Chambres confortables, restaurant et services adaptés à vos séjours au Cameroun.",

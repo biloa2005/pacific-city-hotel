@@ -170,7 +170,7 @@ export default function ContactClair() {
 
           {/* INFOS DE CONTACT (droite) */}
           <div
-            className={`font-poppins flex flex-col justify-between gap-10 transition-all duration-700 delay-300 ease-out ${
+            className={`font-poppins flex flex-col justify-between gap-10 transition-all duration-700 delay-300 ease-out sm:text-xs${
               isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-8'
             }`}
           >

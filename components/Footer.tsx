@@ -89,7 +89,7 @@ export default function Footer() {
               </li>
               <li className="flex items-start gap-2.5 text-sm text-white/50">
                 <MapPin className="w-4 h-4 mt-0.5 shrink-0" />
-                En face de la Mairie d&apos;Obala, Cameroun
+                En face de la Mairie d&apos;Obala,Yaoundé, Cameroun
               </li>
             </ul>
           </div>

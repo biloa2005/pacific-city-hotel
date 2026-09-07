@@ -25,8 +25,8 @@ const heroTitles = [
     line2: "au cœur d'Obala",
   },
   {
-    line1: 'Chaque détail compte,',
-    line2: 'pour votre bien-être',
+    line1: 'Découvrez le confort,',
+    line2: "vivez l'experience",
   },
 ];
 

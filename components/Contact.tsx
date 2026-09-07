@@ -36,7 +36,7 @@ const CONTACT_INFO = [
   {
     icon: Phone,
     label: 'Téléphone',
-    value: '+237 651 052 543 / 655 71 48 64',
+    value: '+237 651052543 / 655714864',
     href: 'tel:+237651052543', // Format tel: pour les liens mobiles
   },
   {
@@ -48,7 +48,7 @@ const CONTACT_INFO = [
   {
     icon: MapPin,
     label: 'Adresse',
-    value: "En face de la Mairie d'Obala, Obala, Cameroun",
+    value: "En face de la Mairie d'Obala, Yaoundé, Cameroun",
     href: undefined, // Pas de lien pour l'adresse ici
   },
   {

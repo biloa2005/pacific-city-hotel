@@ -170,9 +170,11 @@ export default function ServicesSection() {
                 }`}
               >
                 {/* Icône */}
-                <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center bg-[#D4AF37]/10  transition-all duration-300 group-hover:bg-[#D4AF37] group-hover:text-white">
-                  {service.icon}
-                </div>
+               {/* Icône avec couleur dorée par défaut */}
+<div className="flex h-12 w-12 flex-shrink-0 items-center justify-center bg-[#D4AF37]/10 text-[#D4AF37] transition-all duration-300 group-hover:bg-[#D4AF37] group-hover:text-white">
+  {service.icon}
+</div>
+
 
                 {/* Titre */}
                 <h3 className="text-sm font-semibold text-gray-900 transition-colors duration-300 group-hover:text-[#D4AF37] md:text-base">

@@ -31,10 +31,8 @@ export default function RestaurantGrid() {
   }, []);
 
   return (
-    <section className="max-w-3xl lg:max-w-5xl mx-auto p-2 sm:p-4">
-      {/* Grille responsive */}
-      <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-1.5 sm:gap-1 lg:gap-2 max-w-4xl mx-auto">
-        {items.map((item) => (
+   <section className="w-full px-2 sm:px-4 lg:px-6">
+  <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-1.5 sm:gap-2 lg:gap-3 w-full">        {items.map((item) => (
           <button
             key={item.id}
             onClick={() => setSelectedItem(item)}

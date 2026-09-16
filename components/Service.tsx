@@ -177,7 +177,7 @@ export default function ServicesSection() {
 
 
                 {/* Titre */}
-                <h3 className="text-sm font-semibold text-gray-900 transition-colors duration-300 group-hover:text-[#D4AF37] md:text-base">
+                <h3 className="font-serif text-sm font-semibold text-gray-900 transition-colors duration-300 group-hover:text-[#D4AF37] md:text-base">
                   {service.title}
                 </h3>
 

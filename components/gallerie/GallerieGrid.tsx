@@ -15,9 +15,11 @@ const items: RestaurantItem[] = [
   { id: '3', title: 'Espace privée Restaurant', fileName: 'reception prive.webp' },
   { id: '4', title: 'Salle de conference', fileName: 'salle de conference.webp' },
   { id: '5', title: 'Espace detentes interieur', fileName: 'repos.webp' },
-  { id: '6', title: 'Balansoir', fileName: 'balansoire.webp' },
-  { id: '7', title: 'Entrer principale', fileName: 'hero.webp' },
-  { id: '8', title: 'Reception', fileName: 'porte ancienne.webp' },
+  { id: '6', title: 'Balançoire', fileName: 'balansoire.webp' },
+  { id: '7', title: 'Accès principal', fileName: 'hero.webp' },
+  { id: '8', title: 'Porte de la réception', fileName: 'porte ancienne.webp' },
+   { id: '9', title: 'chambre standart', fileName: 'chambre1.webp' },
+ 
 ];
 
 export default function RestaurantGrid() {
@@ -64,9 +66,9 @@ export default function RestaurantGrid() {
   }, []);
 
   return (
-    <section ref={sectionRef} className="max-w-5xl mx-auto p-2 sm:p-4 overflow-hidden">
+    <section ref={sectionRef} className="w-full mx- p-2 sm:p-4 overflow-hidden">
       {/* Grille responsive avec réduction sur grand écran */}
-      <div className="grid grid-cols-3 sm:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-1.5 sm:gap-2 lg:gap-3 max-w-4xl mx-auto">
+      <div className="grid grid-cols-3 sm:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-1.5 sm:gap-2 lg:gap-3  w-full mx-auto">
         {items.map((item, index) => {
           // Déterminer la direction d'entrée (gauche ou droite)
           const isLeft = index % 2 === 0;

@@ -10,9 +10,9 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 
 const ROOM_IMAGES = [
-  '/chambre/s2.webp',
-  'hero.webp',
   '/chambre/c1.webp',
+  'hero.webp',
+  '/chambre/s2.webp',
   '/chambre/c2.webp',
   '/chambre/s3.webp',
 ];

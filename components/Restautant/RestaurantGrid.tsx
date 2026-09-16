@@ -16,6 +16,7 @@ const items: RestaurantItem[] = [
   { id: '4', title: 'Salade', fileName: 'salade.webp' },
   { id: '5', title: 'Poisson Braisé', fileName: 'poisson braisse.webp' },
   { id: '6', title: 'Ndolè', fileName: 'ndolet.webp' },
+  
 ];
 
 export default function RestaurantGrid() {

@@ -27,7 +27,7 @@ export default function PacificDescription() {
   </span>
 </h1>
 
-<p className="text-base md:text-xl leading-loose text-gray-700 max-w-2xl mx-auto lg:mx-0">
+<p className="text-base md:text-base leading-loose text-gray-700 max-w-2xl mx-auto lg:mx-0">
   Au{' '}
   
     Pacific City Hotel
@@ -84,7 +84,7 @@ export default function PacificDescription() {
                     Horaires
                   </p>
 
-                  <p className="mt-1 text-sm md:text-lg md:text-lg font-medium text-gray-900">
+                  <p className="mt-1 text-base font-medium text-gray-900">
                     À partir de 6H00 à 23H00
                   </p>
                 </div>
@@ -107,14 +107,14 @@ export default function PacificDescription() {
                   <div className="mt-1 flex flex-col gap-1">
                     <a
                       href="tel:+237651052543"
-                      className="text-sm md:text-lg font-medium text-gray-900 hover:text-[#D4AF37] transition-colors"
+                      className="text-base font-medium text-gray-900 hover:text-[#D4AF37] transition-colors"
                     >
                       +237 651 052 543
                     </a>
 
                     <a
                       href="tel:+237655714864"
-                      className="text-sm md:text-lg font-medium text-gray-900 hover:text-[#D4AF37] transition-colors"
+                      className="text-base font-medium text-gray-900 hover:text-[#D4AF37] transition-colors"
                     >
                       +237 655 714 864
                     </a>
@@ -138,7 +138,7 @@ export default function PacificDescription() {
 
                   <a
                     href="mailto:pacificcity65@gmail.com"
-                    className="mt-1 block text-sm  md:text-lg font-medium text-gray-900 hover:text-[#D4AF37] transition-colors break-all"
+                    className="mt-1 block text-base font-medium text-gray-900 hover:text-[#D4AF37] transition-colors break-all"
                   >
                     pacificcity65@gmail.com
                   </a>

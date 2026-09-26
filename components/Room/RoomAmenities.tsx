@@ -14,6 +14,7 @@ import {
   BedDouble,
   BadgeDollarSign,
   Ruler,
+  AirVent,
 } from 'lucide-react';
 
 // Définition du type pour chaque équipement
@@ -33,6 +34,8 @@ const ROOM_EQUIPMENTS: Record<RoomCategory, EquipmentItem[]> = {
     { id: '2', name: '1 Lit Double', icon: Bed },
      { id: '3', name: 'Service de chambre 24h/24', icon: UtensilsCrossed },
    { id: '4', name: 'Chambre + Salon privé', icon: BedDouble },
+    { id: '5', name: 'Climatisation', icon: AirVent },
+
    
   
     ],

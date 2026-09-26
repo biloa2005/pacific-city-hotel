@@ -22,7 +22,7 @@ export const metadata: Metadata = {
     template: "%s | Pacific Hotel",
   },
   icons:{
-    icon:"logo.webp"
+    icon:"icon.webp"
   },
 
   description:
@@ -53,7 +53,7 @@ export const metadata: Metadata = {
   },
 };
 export const viewport: Viewport = {
-  themeColor: "#E5B83F",
+  themeColor: "#252525",
 };
 
 export default function RootLayout({

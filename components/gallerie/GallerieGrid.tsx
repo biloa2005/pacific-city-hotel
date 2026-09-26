@@ -69,7 +69,7 @@ export default function RestaurantGrid() {
   return (
     <section ref={sectionRef} className="w-full mx- p-2 sm:p-4 overflow-hidden">
       {/* Grille responsive avec réduction sur grand écran */}
-      <div className="grid grid-cols-3 sm:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-1.5 sm:gap-2 lg:gap-3  w-full mx-auto">
+      <div className="grid grid-cols-3 sm:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-1.5 sm:gap-2 lg:gap-3  w-full lg:px-14 mx-auto">
         {items.map((item, index) => {
           // Déterminer la direction d'entrée (gauche ou droite)
           const isLeft = index % 2 === 0;

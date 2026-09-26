@@ -43,7 +43,7 @@ export default function RoomSlide() {
               <img
                 src={src}
                 alt={`Pacific City Hotel ${index + 1}`}
-                className="w-full h-full object-cover"
+                className="w-full h-full object-cover object-center"
               />
               
               {/* Assombrissement renforcé pour la lisibilité */}

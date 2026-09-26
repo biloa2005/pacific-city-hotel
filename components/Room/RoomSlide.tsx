@@ -45,7 +45,7 @@ export default function RoomSlide() {
               <img
                 src={image.src}
                 alt={`Chambre Pacific Hotel ${index + 1}`}
-                className="w-full h-full object-cover"
+                className="w-full h-full object-cover object-center"
               />
               
               {/* Assombrissement pour la lisibilité */}

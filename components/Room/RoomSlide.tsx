@@ -2,7 +2,7 @@
 
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { EffectFade, Autoplay, Navigation } from 'swiper/modules';
-import { ChevronLeft, ChevronRight, Star, Award } from 'lucide-react';
+import { ChevronLeft, ChevronRight,} from 'lucide-react';
 
 import 'swiper/css';
 import 'swiper/css/effect-fade';
@@ -13,7 +13,7 @@ const ROOM_IMAGES = [
   { src: '/chambre/b2.webp', title: 'Confort Absolu', description: 'Chaque détail est pensé pour votre bien-être' },
   { src: '/chambre/c1.webp', title: 'Élégance et Sérénité', description: 'Une atmosphère apaisante pour vous ressourcer' },
   { src: '/chambre/c2.webp', title: 'Luxure et Authenticité', description: 'Le charme de l\'Afrique au cœur de la ville' },
-  { src: '/chambre/baignoire.webp', title: 'Détente et Bien-Être', description: 'Offrez-vous un moment de relaxation absolue' },
+  { src: '/chambre/chambre.webp', title: 'Détente et Bien-Être', description: 'Offrez-vous un moment de relaxation absolue' },
   { src: '/chambre/m2.webp', title: 'Design Contemporain', description: 'Une esthétique moderne pour votre confort' },
   { src: '/chambre/s3.webp', title: 'Hospitalité Légendaire', description: 'Nous mettons tout en œuvre pour votre satisfaction' },
 ];

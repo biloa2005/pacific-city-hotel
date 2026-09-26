@@ -19,6 +19,7 @@ const items: RestaurantItem[] = [
   { id: '7', title: 'Accès principal', fileName: 'hero.webp' },
   { id: '8', title: 'Porte de la réception', fileName: 'porte ancienne.webp' },
    { id: '9', title: 'chambre standart', fileName: 'chambre1.webp' },
+      { id: '10', title: 'chambre climatisée', fileName: 'chambre2.webp' },
  
 ];
 

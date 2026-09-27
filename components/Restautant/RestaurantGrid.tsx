@@ -21,22 +21,44 @@ const items: RestaurantItem[] = [
 
 export default function RestaurantGrid() {
   const [selectedItem, setSelectedItem] = useState<RestaurantItem | null>(null);
+  const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
+
+  const openItem = (index: number) => {
+    setSelectedIndex(index);
+    setSelectedItem(items[index]);
+  };
+
+  const showPrev = () => {
+    if (selectedIndex === null) return;
+    const newIndex = (selectedIndex - 1 + items.length) % items.length;
+    setSelectedIndex(newIndex);
+    setSelectedItem(items[newIndex]);
+  };
+
+  const showNext = () => {
+    if (selectedIndex === null) return;
+    const newIndex = (selectedIndex + 1) % items.length;
+    setSelectedIndex(newIndex);
+    setSelectedItem(items[newIndex]);
+  };
 
   // Gestion de la touche Échap pour fermer la modal
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape') setSelectedItem(null);
+      if (e.key === 'ArrowLeft') showPrev();
+      if (e.key === 'ArrowRight') showNext();
     };
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, []);
+  }, [selectedIndex]);
 
   return (
-   <section className="w-full px-2 sm:px-4 lg:px-6">
-  <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-1.5 sm:gap-2 lg:gap-3 w-full">        {items.map((item) => (
+   <section className="w-full px-2 sm:px-4 lg:px-15">
+  <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-1.5 sm:gap-2 lg:gap-3 w-full">        {items.map((item, index) => (
           <button
             key={item.id}
-            onClick={() => setSelectedItem(item)}
+            onClick={() => openItem(index)}
             className="group relative flex flex-col overflow-hidden bg-black text-left focus:outline-none focus:ring-2 focus:ring-amber-500"
           >
             {/* Conteneur d'image rectangulaire (Ratio 4:3) */}
@@ -97,6 +119,28 @@ export default function RestaurantGrid() {
             >
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+
+            {/* Bouton précédent */}
+            <button
+              onClick={showPrev}
+              aria-label="Image précédente"
+              className="absolute left-3 top-1/2 -translate-y-1/2 z-10 p-2 rounded-full bg-black/50 text-white hover:bg-black/80 transition-colors focus:outline-none"
+            >
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7" />
+              </svg>
+            </button>
+
+            {/* Bouton suivant */}
+            <button
+              onClick={showNext}
+              aria-label="Image suivante"
+              className="absolute right-3 top-1/2 -translate-y-1/2 z-10 p-2 rounded-full bg-black/50 text-white hover:bg-black/80 transition-colors focus:outline-none"
+            >
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
               </svg>
             </button>
 

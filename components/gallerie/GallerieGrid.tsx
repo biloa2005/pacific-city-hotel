@@ -7,14 +7,18 @@ interface RestaurantItem {
   id: string;
   title: string;
   fileName: string;
+  // Certaines photos sources ont un liseré noir sur un bord (bordure/filigrane
+  // présent dans le fichier lui-même). "zoom" permet de recadrer légèrement
+  // l'image pour faire sortir ce bord du cadre visible, sans toucher au fichier.
+  zoom?: boolean;
 }
 
 const items: RestaurantItem[] = [
   { id: '1', title: 'Facade avant', fileName: 'accueil.webp' },
   { id: '2', title: 'Parking', fileName: 'vue.webp' },
   { id: '3', title: 'Espace privée Restaurant', fileName: 'reception prive.webp' },
-  { id: '4', title: 'Salle de conference', fileName: 'salle de conference.webp' },
-  { id: '5', title: 'Espace detentes interieur', fileName: 'repos.webp' },
+  { id: '4', title: 'Salle de conference', fileName: 'salle de conference.webp', zoom: true },
+  { id: '5', title: 'Espace detentes interieur', fileName: 'repos.webp', zoom: true },
   { id: '6', title: 'Balançoire', fileName: 'balansoire.webp' },
   { id: '7', title: 'Accès principal', fileName: 'hero.webp' },
   { id: '8', title: 'Porte de la réception', fileName: 'porte ancienne.webp' },
@@ -25,17 +29,39 @@ const items: RestaurantItem[] = [
 
 export default function RestaurantGrid() {
   const [selectedItem, setSelectedItem] = useState<RestaurantItem | null>(null);
+  const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
   const [visibleItems, setVisibleItems] = useState<number[]>([]);
   const sectionRef = useRef<HTMLElement>(null);
+
+  const openItem = (index: number) => {
+    setSelectedIndex(index);
+    setSelectedItem(items[index]);
+  };
+
+  const showPrev = () => {
+    if (selectedIndex === null) return;
+    const newIndex = (selectedIndex - 1 + items.length) % items.length;
+    setSelectedIndex(newIndex);
+    setSelectedItem(items[newIndex]);
+  };
+
+  const showNext = () => {
+    if (selectedIndex === null) return;
+    const newIndex = (selectedIndex + 1) % items.length;
+    setSelectedIndex(newIndex);
+    setSelectedItem(items[newIndex]);
+  };
 
   // Gestion de la touche Échap pour fermer la modal
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape') setSelectedItem(null);
+      if (e.key === 'ArrowLeft') showPrev();
+      if (e.key === 'ArrowRight') showNext();
     };
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, []);
+  }, [selectedIndex]);
 
   // Animation d'apparition en cascade
   useEffect(() => {
@@ -78,7 +104,7 @@ export default function RestaurantGrid() {
           return (
             <button
               key={item.id}
-              onClick={() => setSelectedItem(item)}
+              onClick={() => openItem(index)}
               className={`group relative flex flex-col overflow-hidden bg-black text-left focus:outline-none focus:ring-2 focus:ring-amber-500 transition-all duration-700 ease-out ${
                 isVisible 
                   ? 'opacity-100 translate-x-0' 
@@ -95,7 +121,9 @@ export default function RestaurantGrid() {
                   alt={item.title}
                   fill
                   sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
-                  className="object-cover transition-transform duration-300 group-hover:scale-105"
+                  className={`object-cover transition-transform duration-300 group-hover:scale-105 ${
+                    item.zoom ? 'scale-110' : ''
+                  }`}
                 />
 
                 {/* Overlay Hover : Assombrissement + Croix blanche au centre */}
@@ -150,6 +178,28 @@ export default function RestaurantGrid() {
               </svg>
             </button>
 
+            {/* Bouton précédent */}
+            <button
+              onClick={showPrev}
+              aria-label="Image précédente"
+              className="absolute left-3 top-1/2 -translate-y-1/2 z-10 p-2 rounded-full bg-black/50 text-white hover:bg-black/80 transition-colors focus:outline-none"
+            >
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7" />
+              </svg>
+            </button>
+
+            {/* Bouton suivant */}
+            <button
+              onClick={showNext}
+              aria-label="Image suivante"
+              className="absolute right-3 top-1/2 -translate-y-1/2 z-10 p-2 rounded-full bg-black/50 text-white hover:bg-black/80 transition-colors focus:outline-none"
+            >
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
+              </svg>
+            </button>
+
             {/* Image de la Modal au format rectangulaire */}
             <div className="relative aspect-[4/3] w-full bg-gray-100">
               <Image
@@ -157,7 +207,7 @@ export default function RestaurantGrid() {
                 alt={selectedItem.title}
                 fill
                 sizes="(max-width: 768px) 100vw, 50vw"
-                className="object-cover"
+                className={`object-cover ${selectedItem.zoom ? 'scale-110' : ''}`}
                 priority
               />
             </div>

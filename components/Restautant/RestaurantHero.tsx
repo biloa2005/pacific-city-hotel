@@ -3,7 +3,7 @@ import { Star } from 'lucide-react';
 
 export default function RestaurantHero() {
   return (
-    <div className="relative w-full aspect-[4/3] lg:h-screen lg:aspect-auto overflow-hidden bg-black">
+    <div className="relative w-full h-[55vh] lg:h-screen overflow-hidden overflow-hidden bg-black">
       {/* Image de fond */}
       <Image
         src="/gallerie/bar.webp"
@@ -11,7 +11,7 @@ export default function RestaurantHero() {
         fill
         priority
         className="object-cover"
-        sizes="(max-width: 1024px) 100vw, 100vw"
+        
       />
       
       {/* Assombrissement */}

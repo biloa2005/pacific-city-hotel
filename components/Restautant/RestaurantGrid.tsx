@@ -13,7 +13,7 @@ const items: RestaurantItem[] = [
   { id: '1', title: 'Liqueur', fileName: 'liqueur.webp' },
   { id: '2', title: 'Jus de Bissap', fileName: 'jus de bissap.webp' },
   { id: '3', title: 'Salade de Fruit', fileName: 'salade de fruit.webp' },
-  { id: '4', title: 'Salade', fileName: 'salade.webp' },
+  { id: '4', title: 'Salade', fileName: 'salade-laitue.webp' },
   { id: '5', title: 'Poisson Braisé', fileName: 'poisson braisse.webp' },
   { id: '6', title: 'Ndolè', fileName: 'ndolet.webp' },
   

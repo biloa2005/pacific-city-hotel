@@ -22,7 +22,7 @@ export const metadata: Metadata = {
     template: "%s | Pacific Hotel",
   },
   icons:{
-    icon:"icon.webp"
+    icon:"/icon.webp"
   },
 
   description:

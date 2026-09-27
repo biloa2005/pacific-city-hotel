@@ -86,14 +86,17 @@ export default function RoomAmenities() {
         </div>
 
         {/* 3 FILTRES DE CATÉGORIES */}
-        <div className="flex flex-wrap justify-center gap-3 sm:gap-4 mb-12">
+        {/* Changement : grid-cols-3 sur mobile pour que les 3 boutons aient exactement
+            la même taille (largeur égale), quelle que soit la longueur du label.
+            À partir de sm: retour au comportement flex-wrap d'origine. */}
+        <div className="grid grid-cols-3 gap-2 sm:flex sm:flex-wrap sm:justify-center sm:gap-4 mb-12">
           {FILTERS.map((filter) => {
             const isActive = activeFilter === filter.key;
             return (
               <button
                 key={filter.key}
                 onClick={() => setActiveFilter(filter.key)}
-                className={`px-4 sm:px-5 py-2 sm:py-2.5  text-xs sm:text-sm font-medium tracking-wide transition-all duration-300 border ${
+                className={`w-full sm:w-auto px-2 sm:px-5 py-2 sm:py-2.5 text-[10px] sm:text-sm font-medium tracking-wide text-center leading-tight break-words transition-all duration-300 border ${
                   isActive
                     ? 'bg-[#D4AF37] text-white border-[#D4AF37] shadow-md shadow-[#D4AF37]/20 scale-105'
                     : 'bg-white text-stone-700 border-stone-200 hover:border-[#D4AF37]/60 hover:text-[#D4AF37]'
@@ -118,9 +121,9 @@ export default function RoomAmenities() {
               >
                 {/* Icône de l'équipement */}
                 {/* Changement : w-10 h-10 -> w-8 h-8 (sur mobile) */}
-                <div className="w-15 h-20 sm:w-10 sm:h-10 rounded-lg bg-[#D4AF37]/10 flex items-center justify-center shrink-0 group-hover:bg-[#D4AF37] transition-colors duration-300">
+                <div className="w-15 h-20 sm:w-10 sm:h-10 rounded-lg bg-[#D4AF37]/10 flex items-center justify-center shrink-0 transition-all duration-300 ease-out group-hover:bg-[#D4AF37] group-hover:scale-110 lg:group-hover:scale-125 group-hover:rotate-6 group-hover:shadow-lg group-hover:shadow-[#D4AF37]/40">
                   {/* Changement : w-5 h-5 -> w-4 h-4 (sur mobile) */}
-                  <IconComponent className="w-10 h-15 lg:w-20 lg:h-15 sm:w-5 sm:h-5  group-hover:text-white transition-colors duration-300" />
+                  <IconComponent className="w-10 h-15 lg:w-20 lg:h-15 sm:w-5 sm:h-5 transition-all duration-300 ease-out group-hover:text-white group-hover:scale-110" />
                 </div>
 
                 {/* Nom de l'équipement */}
